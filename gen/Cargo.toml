@@ -1,28 +1,29 @@
 [package]
 name = "gen"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
-anyhow = "1.0.86"
-cargo_toml = "0.20.3"
-dirs = "5.0.1"
-heck = "0.5.0"
-itertools = "0.13.0"
-lazy_static = "1.5.0"
-rayon = "1.10.0"
-reqwest = { version = "0.12.5", features = [
+anyhow = "1"
+cargo_toml = "0.22"
+dirs = "6"
+heck = "0.5"
+itertools = "0.14"
+lazy_static = "1.5"
+rayon = "1"
+reqwest = { version = "0.13", features = [
     "http2",
-    "rustls-tls",
+    "rustls",
     "blocking",
+    "query",
 ] }
-scraper = "0.19.1"
-serde = { version = "1.0.204", features = ["derive"] }
-serde_json = "1.0.120"
-skia-safe = { version = "0.75.0", features = ["textlayout", "webp"] }
-strum = { version = "0.26.3", features = ["derive", "strum_macros"] }
-toml = "0.8.15"
-unescaper = "0.1.5"
+scraper = "0.25"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+skia-safe = { version = "0.91", features = ["textlayout", "webp"] }
+strum = { version = "0.27", features = ["derive", "strum_macros"] }
+toml = "0.9"
+unescaper = "0.1"
 
 [dev-dependencies]
-ttf-parser = "0.24.0"
+ttf-parser = "0.25"

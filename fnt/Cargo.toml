@@ -1,7 +1,7 @@
 [package]
 name = "google-fonts"
 version = "0.1.6"
-edition = "2021"
+edition = "2024"
 authors = ["Rana Ian"]
 description = "Download and cache TTF fonts from Google."
 documentation = "https://docs.rs/google-fonts"
@@ -11,24 +11,11 @@ categories = ["api-bindings", "graphics", "text-processing", "rendering"]
 license = "MIT"
 repository = "https://github.com/rana/google-fonts"
 
-[dependencies]
-dirs = "5.0.1"
-serde_json = "1.0.120"
-
-[dependencies.reqwest]
-version = "0.12.5"
-features = ["http2", "rustls-tls", "blocking"]
-
-[dependencies.serde]
-version = "1.0.204"
-features = ["derive"]
-
-[dependencies.strum]
-version = "0.26.3"
-features = ["derive", "strum_macros"]
-
-[dev-dependencies]
-ttf-parser = "0.24.0"
+[lib]
+path = "src/lib.rs"
+name = "google_fonts"
+crate-type = ["lib"]
+required-features = []
 
 [features]
 default = ["variable"]
@@ -36,27 +23,36 @@ full = ["variable", "static"]
 static = []
 variable = []
 
-[lib]
-path = "src/lib.rs"
-name = "google_fonts"
-edition = "2021"
-crate-type = ["lib"]
-required-features = []
+[dependencies]
+dirs = "6"
+serde_json = "1"
+
+[dependencies.reqwest]
+version = "0.13"
+features = ["http2", "rustls", "blocking", "query"]
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
+
+[dependencies.strum]
+version = "0.27"
+features = ["derive", "strum_macros"]
+
+[dev-dependencies]
+ttf-parser = "0.25"
 
 [[example]]
 path = "examples/download.rs"
 name = "download"
-edition = "2021"
 required-features = ["full"]
 
 [[example]]
 path = "examples/enumerate.rs"
 name = "enumerate"
-edition = "2021"
 required-features = []
 
 [[example]]
 path = "examples/serde.rs"
 name = "serde"
-edition = "2021"
 required-features = []

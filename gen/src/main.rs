@@ -142,12 +142,11 @@ pub fn build(pth: &str, wrt_imgs: bool) -> Result<()> {
             // Check for font name collision.
             // Occurs for "Asap CondensedLight", "AsapCondensed Light".
             *fnt_variants_cnt.entry(fnt.variant.clone()).or_default() += 1;
-            if let Some(cnt) = fnt_variants_cnt.get(&fnt.variant) {
-                if *cnt != 1 {
+            if let Some(cnt) = fnt_variants_cnt.get(&fnt.variant)
+                && *cnt != 1 {
                     // Append numeric suffix to font name.
                     fnt.variant.push_str(&cnt.to_string());
                 }
-            }
             let fnt = rc(fnt);
 
             // Associate Subs.
@@ -1315,7 +1314,6 @@ pub fn sub_variant(name: String) -> String {
 // https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/checkout/google_web.png=w200
 
 /// ![Google Fonts](https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/checkout/google_web.png=w200)
-
 /// Get a metadata list for font families.
 pub fn get_family_metadata_list(cli: &Client) -> Result<Vec<FamilyMetadata>> {
     let txt = cli
@@ -1375,6 +1373,7 @@ impl PartialEq for FamilyMetadata {
 impl Eq for FamilyMetadata {}
 
 // Implement PartialOrd
+#[allow(clippy::non_canonical_partial_ord_impl)]
 impl PartialOrd for FamilyMetadata {
     fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
         Some(self.family.cmp(&other.family))
@@ -1545,7 +1544,7 @@ impl Fam {
     pub fn get_file_list(&self, cli: &Client) -> Result<Manifest> {
         // Create file path.
         let mut pth = cache_dir();
-        pth.push(&format!("{}_file_list", &self.variant));
+        pth.push(format!("{}_file_list", &self.variant));
         pth.set_extension("json");
 
         // Check if the file already exists.
@@ -1569,11 +1568,10 @@ impl Fam {
         // to allow deserialization.
         //  ")]}'\n{\n
         let mut txt: &str = txt.as_ref();
-        if let Some(idx) = txt.find('{') {
-            if idx != 0 {
+        if let Some(idx) = txt.find('{')
+            && idx != 0 {
                 txt = &txt[idx..];
             }
-        }
 
         // Write the data to disk for caching.
         // eprintln!("writing {:?}", &pth);
@@ -1589,7 +1587,7 @@ impl Fam {
     pub fn get_metadata_detail(&self, cli: &Client) -> Result<FamilyMetadataDetail> {
         // Create file path.
         let mut pth = cache_dir();
-        pth.push(&format!("{}_meta", &self.variant));
+        pth.push(format!("{}_meta", &self.variant));
         pth.set_extension("json");
 
         // Check if the file already exists.
@@ -1613,11 +1611,10 @@ impl Fam {
         // to allow deserialization.
         //  ")]}'\n{\n
         let mut txt: &str = txt.as_ref();
-        if let Some(idx) = txt.find('{') {
-            if idx != 0 {
+        if let Some(idx) = txt.find('{')
+            && idx != 0 {
                 txt = &txt[idx..];
             }
-        }
 
         // Write the data to disk for caching.
         // eprintln!("writing {:?}", &pth);
@@ -1685,11 +1682,10 @@ impl Fnt {
         // to allow deserialization.
         //  ")]}'\n{\n
         let mut txt: &str = txt.as_ref();
-        if let Some(idx) = txt.find('{') {
-            if idx != 0 {
+        if let Some(idx) = txt.find('{')
+            && idx != 0 {
                 txt = &txt[idx..];
             }
-        }
 
         // Write the data to disk for caching.
         // eprintln!("writing {:?}", &pth);
