@@ -1,6 +1,6 @@
 [package]
 name = "google-fonts"
-version = "0.1.6"
+version = "0.2.0"
 edition = "2024"
 authors = ["Rana Ian"]
 description = "Download and cache TTF fonts from Google."
@@ -18,26 +18,42 @@ crate-type = ["lib"]
 required-features = []
 
 [features]
-default = ["variable"]
-full = ["variable", "static"]
+default = ["variable", "rustls-tls"]
+full = ["variable", "static", "serde", "strum", "metadata", "fns", "rkyv", "facet", "rustls-tls"]
 static = []
 variable = []
+serde = []
+strum = ["dep:strum"]
+metadata = []
+fns = []
+rkyv = ["dep:rkyv"]
+facet = ["dep:facet"]
+# TLS backend (pick one)
+rustls-tls = ["reqwest/rustls"]
+native-tls = ["reqwest/native-tls"]
 
 [dependencies]
 dirs = "6"
+serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 [dependencies.reqwest]
 version = "0.13"
-features = ["http2", "rustls", "blocking", "query"]
-
-[dependencies.serde]
-version = "1"
-features = ["derive"]
+default-features = false
+features = ["http2", "blocking", "query"]
 
 [dependencies.strum]
 version = "0.27"
 features = ["derive", "strum_macros"]
+optional = true
+
+[dependencies.rkyv]
+version = "0.8"
+optional = true
+
+[dependencies.facet]
+version = "0.42"
+optional = true
 
 [dev-dependencies]
 ttf-parser = "0.25"
@@ -45,14 +61,14 @@ ttf-parser = "0.25"
 [[example]]
 path = "examples/download.rs"
 name = "download"
-required-features = ["full"]
+required-features = ["fns"]
 
 [[example]]
 path = "examples/enumerate.rs"
 name = "enumerate"
-required-features = []
+required-features = ["strum", "metadata"]
 
 [[example]]
 path = "examples/serde.rs"
 name = "serde"
-required-features = []
+required-features = ["serde"]

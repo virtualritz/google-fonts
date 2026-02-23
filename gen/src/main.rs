@@ -219,22 +219,27 @@ pub fn wrt_fle_family(fams: &[Arc<RwLock<Fam>>], cli: &Client, buf: &mut String)
     //     ABeeZee,
     // }
     buf.push_str(r#"
-use serde::{Deserialize, Serialize};
-use std::ops::RangeInclusive;
-use strum::{Display, EnumCount, EnumIter, EnumString, AsRefStr};
 use crate::font::Font;
+#[cfg(feature = "metadata")]
+use std::ops::RangeInclusive;
+#[cfg(feature = "metadata")]
 use crate::category::Category;
+#[cfg(feature = "metadata")]
 use crate::subset::Subset;
 
 /// The _family id_ increment.
-/// 
+///
 /// The Roboto Serif font family has 721 fonts.
 pub const ID_INCREMENT: u32 = 1000;
 
 /// An _enumeration_ of [Google font](https://fonts.google.com) families.
-/// 
+///
 /// A font family may have one or more fonts with different styles and sizes.
-#[derive(Debug, Display, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize, EnumCount, EnumIter, EnumString, AsRefStr)]
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "strum", derive(strum::EnumIter, strum::AsRefStr))]
+#[cfg_attr(feature = "rkyv", derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
+#[cfg_attr(feature = "facet", derive(facet::Facet))]
 #[repr(u32)] // for `mem::transmute`
 "#);
     buf.push_str(&format!("pub enum {} {{\n", FAMILY));
@@ -352,7 +357,26 @@ pub const ID_INCREMENT: u32 = 1000;
     buf.push_str("        }\n");
     buf.push_str("    }\n"); // end fonts
 
-    // Write `category`.
+    // Write `variant_name`.
+    buf.push('\n');
+    buf.push_str("    /// Returns the variant name of the [`Family`] as a static string.\n");
+    buf.push_str("    pub fn variant_name(&self) -> &'static str {\n");
+    buf.push_str("        match self {\n");
+    for fam in fams.iter() {
+        buf.push_str(&cfg_feature("            ", fam.read().unwrap().features()));
+        buf.push_str(&format!(
+            "            {}::{} => \"{}\",\n",
+            FAMILY,
+            fam.read().unwrap().variant,
+            fam.read().unwrap().variant
+        ));
+    }
+    buf.push_str("        }\n");
+    buf.push_str("    }\n"); // end variant_name
+
+    // Write `category` (metadata-gated).
+    buf.push('\n');
+    buf.push_str("    #[cfg(feature = \"metadata\")]\n");
     buf.push_str(&format!("    /// Returns the font [`{}`].\n", CATEGORY));
     buf.push_str(&format!(
         "    pub fn {}(&self) -> {} {{\n",
@@ -373,8 +397,9 @@ pub const ID_INCREMENT: u32 = 1000;
     buf.push_str("        }\n");
     buf.push_str("    }\n"); // end `category`
 
-    // Write `coverage`
+    // Write `coverage` (metadata-gated).
     buf.push('\n');
+    buf.push_str("    #[cfg(feature = \"metadata\")]\n");
     buf.push_str("    /// Unicode characters supported by the [`Family`].\n");
     buf.push_str(&format!(
         "    pub fn coverage(&self) -> Vec<({}, Vec<RangeInclusive<u32>>)> {{\n",
@@ -425,6 +450,14 @@ pub const ID_INCREMENT: u32 = 1000;
 
     buf.push_str("}\n"); // end impl Family
 
+    // Write manual Display impl for Family.
+    buf.push('\n');
+    buf.push_str(&format!("impl std::fmt::Display for {} {{\n", FAMILY));
+    buf.push_str("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n");
+    buf.push_str("        f.write_str(self.variant_name())\n");
+    buf.push_str("    }\n");
+    buf.push_str("}\n");
+
     Ok(())
 }
 
@@ -434,16 +467,20 @@ pub fn wrt_fle_font(fnts: &[Arc<RwLock<Fnt>>], buf: &mut String) {
     //     ABeeZeeRegular,
     // }
     buf.push_str(r#"
+#[cfg(feature = "metadata")]
 use crate::category::Category;
 use crate::error::{FontError, StringError};
 use crate::family::{Family, ID_INCREMENT};
 use reqwest::blocking::Client;
 use serde::{Deserialize, Serialize};
 use std::fs;
-use strum::{AsRefStr, Display, EnumCount, EnumIter, EnumString};
 
 /// An _enumeration_ of [Google fonts](https://fonts.google.com).
-#[derive(Debug, Display, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize, EnumCount, EnumIter, EnumString, AsRefStr)]
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "strum", derive(strum::EnumIter, strum::AsRefStr))]
+#[cfg_attr(feature = "rkyv", derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
+#[cfg_attr(feature = "facet", derive(facet::Facet))]
 #[repr(u32)] // for `mem::transmute`
 pub enum Font {
 "#);
@@ -516,17 +553,17 @@ impl Font {
 
     /// Returns the index of the font file for the [`Family`].
     pub fn font_file_idx(&self) -> usize {
-         (self.id() - self.family().id()) as usize 
+         (self.id() - self.family().id()) as usize
     }
 
     /// Returns the name of the [`Font`].
     pub fn name(&self) -> String {
-        self.as_ref().into()
-    }    
+        self.variant_name().into()
+    }
 
     /// Indicates whether the [`Font`] uses _variable_ font technology.
     pub fn is_variable(&self) -> bool {
-        self.as_ref().contains("Variable")
+        self.variant_name().contains("Variable")
     }
 
     /// Indicates whether the [`Font`] uses _static_ font technology.
@@ -596,7 +633,7 @@ impl Font {
             Some(mut pth) => {
                 // Set the file name.
                 pth.push("google-fonts");
-                pth.push(self.to_string()); // Font file name.
+                pth.push(self.variant_name()); // Font file name.
                 pth.set_extension("ttf");
 
                 if pth.exists() {
@@ -641,7 +678,26 @@ impl Font {
     buf.push_str("        unsafe { std::mem::transmute(id) }\n");
     buf.push_str("    }\n"); // end from_id
 
-    // Write `category`.
+    // Write `variant_name`.
+    buf.push('\n');
+    buf.push_str("    /// Returns the variant name of the [`Font`] as a static string.\n");
+    buf.push_str("    pub fn variant_name(&self) -> &'static str {\n");
+    buf.push_str("        match self {\n");
+    for fnt in fnts.iter() {
+        buf.push_str(&cfg_feature("            ", fnt.read().unwrap().features()));
+        buf.push_str(&format!(
+            "            {}::{} => \"{}\",\n",
+            FONT,
+            fnt.read().unwrap().variant,
+            fnt.read().unwrap().variant
+        ));
+    }
+    buf.push_str("        }\n");
+    buf.push_str("    }\n"); // end variant_name
+
+    // Write `category` (metadata-gated).
+    buf.push('\n');
+    buf.push_str("    #[cfg(feature = \"metadata\")]\n");
     buf.push_str(&format!("    /// Returns the font [`{}`].\n", CATEGORY));
     buf.push_str(&format!(
         "    pub fn {}(&self) -> {} {{\n",
@@ -671,6 +727,14 @@ impl Font {
     buf.push_str("    }\n"); // end `category`
 
     buf.push_str("}\n"); // end impl Font
+
+    // Write manual Display impl for Font.
+    buf.push('\n');
+    buf.push_str(&format!("impl std::fmt::Display for {} {{\n", FONT));
+    buf.push_str("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n");
+    buf.push_str("        f.write_str(self.variant_name())\n");
+    buf.push_str("    }\n");
+    buf.push_str("}\n");
 
     // Write supporting structs.
     buf.push_str(
@@ -702,15 +766,17 @@ pub fn wrt_fle_category(cats: &[Arc<RwLock<Cat>>], buf: &mut String) {
     //     ABeeZee,
     // }
     buf.push_str(r#"
-use serde::{Deserialize, Serialize};
-use strum::{Display, EnumCount, EnumIter, EnumString, AsRefStr};
 use crate::family::Family;
 use crate::font::Font;
 
 /// An _enumeration_ of font categories.
-/// 
+///
 /// A font has one category.
-#[derive(Debug, Display, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize, EnumCount, EnumIter, EnumString, AsRefStr)]
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "strum", derive(strum::EnumIter, strum::AsRefStr))]
+#[cfg_attr(feature = "rkyv", derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
+#[cfg_attr(feature = "facet", derive(facet::Facet))]
 "#);
     buf.push_str(&format!("pub enum {} {{\n", CATEGORY));
     for cat in cats.iter() {
@@ -806,7 +872,24 @@ use crate::font::Font;
     buf.push_str("        }\n");
     buf.push_str("    }\n"); // end `fonts`
 
-    buf.push_str("}\n"); // end impl Family
+    buf.push_str("}\n"); // end impl Category
+
+    // Write manual Display impl for Category.
+    buf.push('\n');
+    buf.push_str(&format!("impl std::fmt::Display for {} {{\n", CATEGORY));
+    buf.push_str("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n");
+    buf.push_str("        match self {\n");
+    for cat in cats.iter() {
+        buf.push_str(&format!(
+            "            {}::{} => f.write_str(\"{}\"),\n",
+            CATEGORY,
+            cat.read().unwrap().variant,
+            cat.read().unwrap().variant
+        ));
+    }
+    buf.push_str("        }\n");
+    buf.push_str("    }\n");
+    buf.push_str("}\n");
 }
 
 pub fn wrt_fle_subset(subs: &[Arc<RwLock<Sub>>], buf: &mut String) {
@@ -815,15 +898,17 @@ pub fn wrt_fle_subset(subs: &[Arc<RwLock<Sub>>], buf: &mut String) {
     //     Latin,
     // }
     buf.push_str(r#"
-use serde::{Deserialize, Serialize};
-use strum::{Display, EnumCount, EnumIter, EnumString, AsRefStr};
 use crate::family::Family;
 use crate::font::Font;
 
 /// An _enumeration_ of font subsets.
-/// 
+///
 /// A font has one or more subsets.
-#[derive(Debug, Display, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize, EnumCount, EnumIter, EnumString, AsRefStr)]
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "strum", derive(strum::EnumIter, strum::AsRefStr))]
+#[cfg_attr(feature = "rkyv", derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
+#[cfg_attr(feature = "facet", derive(facet::Facet))]
 "#);
     buf.push_str(&format!("pub enum {} {{\n", SUBSET));
     for sub in subs.iter() {
@@ -900,7 +985,24 @@ use crate::font::Font;
     buf.push_str("        }\n");
     buf.push_str("    }\n"); // end `fonts`
 
-    buf.push_str("}\n"); // end impl Family
+    buf.push_str("}\n"); // end impl Subset
+
+    // Write manual Display impl for Subset.
+    buf.push('\n');
+    buf.push_str(&format!("impl std::fmt::Display for {} {{\n", SUBSET));
+    buf.push_str("    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {\n");
+    buf.push_str("        match self {\n");
+    for sub in subs.iter() {
+        buf.push_str(&format!(
+            "            {}::{} => f.write_str(\"{}\"),\n",
+            SUBSET,
+            sub.read().unwrap().variant,
+            sub.read().unwrap().variant
+        ));
+    }
+    buf.push_str("        }\n");
+    buf.push_str("    }\n");
+    buf.push_str("}\n");
 }
 
 pub fn wrt_fle_error(buf: &mut String) {
@@ -1032,20 +1134,24 @@ impl Error for StringError {}
 pub fn wrt_fle_lib(fnts: &[Arc<RwLock<Fnt>>], buf: &mut String) {
     buf.push_str(
         r#"
+#[cfg(feature = "metadata")]
 pub mod category;
 pub mod error;
 pub mod family;
 pub mod font;
+#[cfg(feature = "metadata")]
 pub mod subset;
+#[cfg(feature = "metadata")]
 pub use crate::category::*;
 pub use crate::error::*;
 pub use crate::family::*;
 pub use crate::font::*;
+#[cfg(feature = "metadata")]
 pub use crate::subset::*;
 "#,
     );
 
-    // Write individual font functions.
+    // Write individual font functions (fns-gated).
     for fnt in fnts.iter() {
         buf.push('\n');
         buf.push_str(&format!(
@@ -1073,6 +1179,7 @@ pub use crate::subset::*;
             "/// Designed by {}.\n",
             comma_and(&fnt.read().unwrap().fam.read().unwrap().meta.designers)
         ));
+        buf.push_str("#[cfg(feature = \"fns\")]\n");
         buf.push_str(&cfg_feature("", fnt.read().unwrap().features()));
         buf.push_str(&format!(
             "pub fn {}() -> Result<Vec<u8>, FontError> {{\n",
@@ -1104,10 +1211,11 @@ pub use crate::subset::*;
     buf.push_str("        assert_eq!(fnt, fam.font());\n");
     buf.push_str("    }\n");
 
-    // Test getting each font's data.
+    // Test getting each font's data (fns-gated).
     for fnt in fnts.iter() {
         buf.push('\n');
         buf.push_str("    #[test]\n");
+        buf.push_str("    #[cfg(feature = \"fns\")]\n");
         buf.push_str(&cfg_feature("    ", fnt.read().unwrap().features()));
         buf.push_str(&format!(
             "    fn test_{}() {{\n",
@@ -1226,11 +1334,34 @@ pub fn wrt_fle_cargo_toml(dir_pth: &str) -> Result<()> {
     man.features.clear();
 
     // Add features.
-    man.features.insert("default".into(), vec![VARIABLE.into()]);
     man.features
-        .insert(FULL.into(), vec![VARIABLE.into(), STATIC.into()]);
+        .insert("default".into(), vec![VARIABLE.into(), "rustls-tls".into()]);
+    man.features.insert(
+        FULL.into(),
+        vec![
+            VARIABLE.into(),
+            STATIC.into(),
+            "serde".into(),
+            "strum".into(),
+            "metadata".into(),
+            "fns".into(),
+            "rkyv".into(),
+            "facet".into(),
+            "rustls-tls".into(),
+        ],
+    );
     man.features.insert(VARIABLE.into(), vec![]);
     man.features.insert(STATIC.into(), vec![]);
+    man.features.insert("serde".into(), vec![]);
+    man.features.insert("strum".into(), vec!["dep:strum".into()]);
+    man.features.insert("metadata".into(), vec![]);
+    man.features.insert("fns".into(), vec![]);
+    man.features.insert("rkyv".into(), vec!["dep:rkyv".into()]);
+    man.features.insert("facet".into(), vec!["dep:facet".into()]);
+    man.features
+        .insert("rustls-tls".into(), vec!["reqwest/rustls".into()]);
+    man.features
+        .insert("native-tls".into(), vec!["reqwest/native-tls".into()]);
 
     // Serialize the mutated manifest back to TOML format
     let toml_string = toml::ser::to_string(&man)?;
@@ -1653,48 +1784,11 @@ impl Fnt {
         .replace(' ', "_")
     }
 
-    /// Get sample text from network or cache.
-    pub fn get_sampletext(&self, cli: &Client) -> Result<String> {
-        // Create file path.
-        let mut pth = cache_dir();
-        pth.push(format!("{}_sampletext", &self.variant));
-        pth.set_extension("json");
-
-        // Load cached file if exists.
-        if pth.exists() {
-            let fle = File::open(pth)?;
-            let rdr = BufReader::new(fle);
-            let ret: FamilySampleText = serde_json::from_reader(rdr)?;
-            return Ok(ret.sample_text.txt());
-        }
-
-        // Get the sample text from the network.
-        let txt = cli
-            .get("https://fonts.google.com/sampletext")
-            .query(&[
-                ("family", self.fam.read().unwrap().name.as_str()),
-                // ("paragraphOnly", "true"),
-            ])
-            .send()?
-            .text()?;
-
-        // Trim leading excess characters
-        // to allow deserialization.
-        //  ")]}'\n{\n
-        let mut txt: &str = txt.as_ref();
-        if let Some(idx) = txt.find('{')
-            && idx != 0 {
-                txt = &txt[idx..];
-            }
-
-        // Write the data to disk for caching.
-        // eprintln!("writing {:?}", &pth);
-        fs::write(pth, txt)?;
-
-        // Deserialize JSON to struct.
-        let ret: FamilySampleText = serde_json::from_str(txt)?;
-
-        Ok(ret.sample_text.txt())
+    /// Get sample text for font preview.
+    pub fn get_sampletext(&self, _cli: &Client) -> Result<String> {
+        // The Google Fonts sampletext API now returns HTML instead of JSON.
+        // Use a default sample text for font previews.
+        Ok("The quick brown fox jumps over the lazy dog".to_string())
     }
 
     /// Get the font data from network or cache.
@@ -1763,6 +1857,7 @@ pub struct FamilyMetadataDetail {
     coverage: HashMap<String, String>,
     description: String,
     languages: Vec<String>,
+    primary_script: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -1809,5 +1904,80 @@ lazy_static! {
         }
 
         pth
+    };
+
+    /// Script-specific pangrams for font preview images.
+    static ref PANGRAMS: HashMap<&'static str, &'static str> = {
+        let mut m = HashMap::new();
+        m.insert("Latn", "The quick brown fox jumps over the lazy dog");
+        m.insert("Arab", "نص حكيم له سر قاطع وذو شأن عظيم مكتوب على ثوب أخضر ومغلف بجلد أزرق");
+        m.insert("Grek", "Ξεσκεπάζω τὴν ψυχοφθόρα βδελυγμία");
+        m.insert("Cyrl", "Съешь ещё этих мягких французских булок, да выпей чаю");
+        m.insert("Hebr", "דג סקרן שט בים מאוכזב ולפתע מצא חברה");
+        m.insert("Deva", "ऋषियों को सताने वाले दुष्ट राक्षसों के राजा रावण का सर्वनाश करने वाले विष्णुवतार भगवान श्रीराम");
+        m.insert("Jpan", "いろはにほへと ちりぬるを わかよたれそ つねならむ");
+        m.insert("Kore", "키스의 고유조건은 입술끼리 , 만, 나, ㄴ, 것");
+        m.insert("Hans", "天地玄黄 宇宙洪荒 日月盈昃 辰宿列张");
+        m.insert("Hant", "天地玄黃 宇宙洪荒 日月盈昃 辰宿列張");
+        m.insert("Thai", "เป็นมนุษย์สุดประเสริฐเลิศคุณค่า กว่าบรรดาฝูงสัตว์เดรัจฉาน");
+        m.insert("Beng", "আমি গ্লাস খেতে পারি, এটা আমার কোনো ক্ষতি করে না");
+        m.insert("Taml", "நான் கண்ணாடி சாப்பிடுவேன், அது எனக்கு சேதம் செய்யாது");
+        m.insert("Telu", "నేను గాజు తినగలను, అది నాకు హాని కలిగించదు");
+        m.insert("Knda", "ನಾನು ಗಾಜನ್ನು ತಿನ್ನಬಲ್ಲೆ, ಅದು ನನಗೆ ಹಾನಿಯನ್ನು ಮಾಡುವುದಿಲ್ಲ");
+        m.insert("Mlym", "എനിക്ക് ഗ്ലാസ് തിന്നാം. അത് എന്നെ വേദനിപ്പിക്കില്ല");
+        m.insert("Sinh", "මට වීදුරු කෑමට හැකිය. එයින් මට කිසි හානියක් සිදු නොවේ");
+        m.insert("Geor", "მინას ვჭამ და არა მტკივა");
+        m.insert("Armn", "Բարdelays delays delays delays delays delays delays delaysoprdelays delays delaysoprdelays delays delaysopfpkopfafgadsads");
+        m.insert("Ethi", "ሰማይ አይታረስ ምድር አይከፈስ");
+        // African scripts
+        m.insert("Tfng", "ⴰⵣⵓⵍ ⴼⵍⵍⴰⵡⵏ");
+        m.insert("Nkoo", "ߒߞߏ ߦߋ߫ ߡߊ߲߬ߛߊ߬ߟߊ ߟߊ߫");
+        m.insert("Vaii", "ꕉꕜꕮ ꔔꘋ ꖸ ꔀꔤ");
+        m.insert("Adlm", "𞤀𞤣𞤤𞤢𞤥 𞤆𞤵𞤤𞤢𞤪");
+        // Middle Eastern
+        m.insert("Syrc", "ܐܢܐ ܐܫܟܚ ܕܐܟܘܠ ܙܓܘܓܝܬܐ");
+        m.insert("Thaa", "އަޅުގަނޑަށް ބިއްލޫރި ކެވޭނެ");
+        // East Asian additional
+        m.insert("Hira", "いろはにほへと ちりぬるを");
+        m.insert("Kana", "イロハニホヘト チリヌルヲ");
+        m.insert("Hang", "키스의 고유조건은 입술끼리 만나는 것");
+        m.insert("Hani", "天地玄黄 宇宙洪荒");
+        // Southeast Asian
+        m.insert("Khmr", "ខ្ញុំអាចញ៉ាំកញ្ចក់បាន ដោយគ្មានបញ្ហា");
+        m.insert("Laoo", "ຂ້ອຍກິນແກ້ວໄດ້ໂດຍທີ່ມັນບໍ່ໄດ້ເຮັດໃຫ້ຂ້ອຍເຈັບ");
+        m.insert("Mymr", "ကျွန်တော် မှန်စားနိုင်သည်");
+        // South Asian additional
+        m.insert("Gujr", "હું કાચ ખાઈ શકું છું અને તેનાથી મને દુઃખ થતું નથી");
+        m.insert("Guru", "ਮੈਂ ਕੱਚ ਖਾ ਸਕਦਾ ਹਾਂ");
+        m.insert("Orya", "ମୁଁ କାଚ ଖାଇପାରେ");
+        // Central Asian
+        m.insert("Tibt", "ང་ཤེལ་ཟ་ཐུབ།");
+        m.insert("Mong", "ᠪᠢ ᠰᠢᠯᠢ ᠢᠳᠡᠵᠦ ᠴᠢᠳᠠᠨᠠ");
+        // Indigenous Americas
+        m.insert("Cher", "ᎠᏂᏴᏫᏯ ᎦᏬᏂᎯᏍᏗ");
+        m.insert("Cans", "ᓀᐦᐃᔭᐍᐏᐣ");
+        m.insert("Osge", "𐓏𐓘𐓻𐓘𐓻𐓟 𐓷𐓣𐓟");
+        // Indonesian scripts
+        m.insert("Bali", "ᬅᬓ᭄ᬱᬭᬩᬮᬶ");
+        m.insert("Java", "ꦲꦏ꧀ꦱꦫꦗꦮ");
+        m.insert("Sund", "ᮃᮊ᮪ᮞᮛᮞᮥᮔ᮪ᮓ");
+        m.insert("Bugi", "ᨒᨚᨈᨑ ᨕᨘᨁᨗ");
+        // Philippine scripts
+        m.insert("Tglg", "ᜊᜌ᜔ᜊᜌᜒᜈ᜔");
+        m.insert("Hano", "ᜱᜨᜳᜨᜳᜥ᜴");
+        m.insert("Buhd", "ᝊᝓᝑᝒ");
+        m.insert("Tagb", "ᝠᝪᝨᝯ");
+        // Indic minority scripts
+        m.insert("Limb", "ᤕᤠᤰᤌᤢᤱ ᤐᤠᤣᤴ");
+        m.insert("Lana", "ᨲᩫ᩠ᩅᩫᨾᩮᩬᩥᨦ");
+        m.insert("Cham", "ꨌꩌ ꨣꨳꨭꩃ");
+        m.insert("Lepc", "ᰛᰩᰵᰛᰧᰶ");
+        m.insert("Olck", "ᱚᱞ ᱪᱤᱠᱤ");
+        m.insert("Mtei", "ꯃꯤꯇꯩ ꯃꯌꯦꯛ");
+        // Symbol/special
+        m.insert("Zyyy", "The quick brown fox jumps over the lazy dog");
+        m.insert("Zsym", "★ ☆ ♠ ♣ ♥ ♦ ← → ↑ ↓");
+        m.insert("Zmth", "∀ ∂ ∃ ∇ ∈ ∉ ∋ ∏ ∑ √ ∞ ∧ ∨");
+        m
     };
 }

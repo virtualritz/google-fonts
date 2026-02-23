@@ -1,13 +1,15 @@
 
-use serde::{Deserialize, Serialize};
-use strum::{Display, EnumCount, EnumIter, EnumString, AsRefStr};
 use crate::family::Family;
 use crate::font::Font;
 
 /// An _enumeration_ of font categories.
 /// 
 /// A font has one category.
-#[derive(Debug, Display, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize, EnumCount, EnumIter, EnumString, AsRefStr)]
+#[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+#[cfg_attr(feature = "strum", derive(strum::EnumIter, strum::AsRefStr))]
+#[cfg_attr(feature = "rkyv", derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize))]
+#[cfg_attr(feature = "facet", derive(facet::Facet))]
 pub enum Category {
     /// The _Display_ font category.
     Display,
@@ -47,6 +49,8 @@ impl Category {
                     Family::AbrilFatface,
                     #[cfg(feature = "static")]
                     Family::Agbalumo,
+                    #[cfg(feature = "variable")]
+                    Family::AguDisplay,
                     #[cfg(feature = "static")]
                     Family::AkayaKanadaka,
                     #[cfg(feature = "static")]
@@ -96,6 +100,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::AveriaSerifLibre,
                     #[cfg(feature = "static")]
+                    Family::BadeenDisplay,
+                    #[cfg(feature = "static")]
                     Family::BagelFatOne,
                     #[cfg(feature = "static")]
                     Family::Bahiana,
@@ -140,21 +146,39 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::BellotaText,
                     #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersDisplay,
+                    Family::BigShoulders,
                     #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersInlineDisplay,
+                    Family::BigShouldersInline,
                     #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersInlineText,
-                    #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersStencilDisplay,
-                    #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersStencilText,
-                    #[cfg(any(feature = "variable", feature = "static"))]
-                    Family::BigShouldersText,
+                    Family::BigShouldersStencil,
                     #[cfg(feature = "static")]
                     Family::BigelowRules,
                     #[cfg(feature = "static")]
                     Family::BigshotOne,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Bitcount,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::BitcountGridDouble,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountGridDoubleInk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::BitcountGridSingle,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountGridSingleInk,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountInk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::BitcountPropDouble,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountPropDoubleInk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::BitcountPropSingle,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountPropSingleInk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::BitcountSingle,
+                    #[cfg(feature = "variable")]
+                    Family::BitcountSingleInk,
                     #[cfg(feature = "static")]
                     Family::BlackAndWhitePicture,
                     #[cfg(feature = "static")]
@@ -167,6 +191,8 @@ impl Category {
                     Family::BlakaInk,
                     #[cfg(feature = "static")]
                     Family::Bokor,
+                    #[cfg(feature = "static")]
+                    Family::Boldonse,
                     #[cfg(feature = "static")]
                     Family::Boogaloo,
                     #[cfg(feature = "static")]
@@ -193,6 +219,8 @@ impl Category {
                     Family::BungeeShade,
                     #[cfg(feature = "static")]
                     Family::BungeeSpice,
+                    #[cfg(feature = "static")]
+                    Family::BungeeTint,
                     #[cfg(feature = "static")]
                     Family::Butcherman,
                     #[cfg(feature = "static")]
@@ -235,7 +263,7 @@ impl Category {
                     Family::Chonburi,
                     #[cfg(feature = "static")]
                     Family::CinzelDecorative,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::ClimateCrisis,
                     #[cfg(feature = "static")]
                     Family::Coda,
@@ -248,11 +276,15 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Comfortaa,
                     #[cfg(feature = "static")]
+                    Family::ComicRelief,
+                    #[cfg(feature = "static")]
                     Family::ConcertOne,
                     #[cfg(feature = "static")]
                     Family::Content,
                     #[cfg(feature = "static")]
                     Family::ContrailOne,
+                    #[cfg(feature = "static")]
+                    Family::CoralPixels,
                     #[cfg(feature = "static")]
                     Family::Corben,
                     #[cfg(feature = "static")]
@@ -293,6 +325,8 @@ impl Category {
                     Family::EricaOne,
                     #[cfg(feature = "static")]
                     Family::Ewert,
+                    #[cfg(feature = "static")]
+                    Family::Exile,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::ExpletusSans,
                     #[cfg(feature = "static")]
@@ -339,6 +373,8 @@ impl Category {
                     Family::Fruktur,
                     #[cfg(feature = "static")]
                     Family::FugazOne,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::FunnelDisplay,
                     #[cfg(feature = "static")]
                     Family::GaMaamli,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -389,7 +425,7 @@ impl Category {
                     Family::HappyMonkey,
                     #[cfg(feature = "static")]
                     Family::HennyPenny,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Honk,
                     #[cfg(feature = "static")]
                     Family::Iceberg,
@@ -437,7 +473,7 @@ impl Category {
                     Family::Jomhuria,
                     #[cfg(feature = "static")]
                     Family::JotiOne,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Kablammo,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::KalniaGlaze,
@@ -470,8 +506,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Lacquer,
                     #[cfg(feature = "static")]
-                    Family::Lalezar,
-                    #[cfg(feature = "static")]
                     Family::Lancelot,
                     #[cfg(feature = "static")]
                     Family::Langar,
@@ -479,6 +513,12 @@ impl Category {
                     Family::Lemon,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Lemonada,
+                    #[cfg(feature = "static")]
+                    Family::LibertinusKeyboard,
+                    #[cfg(feature = "static")]
+                    Family::LibertinusMath,
+                    #[cfg(feature = "static")]
+                    Family::LibertinusSerifDisplay,
                     #[cfg(feature = "static")]
                     Family::LibreBarcode128,
                     #[cfg(feature = "static")]
@@ -526,6 +566,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::MacondoSwashCaps,
                     #[cfg(feature = "static")]
+                    Family::ManufacturingConsent,
+                    #[cfg(feature = "static")]
                     Family::Margarine,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Marhey,
@@ -564,6 +606,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::MoiraiOne,
                     #[cfg(feature = "static")]
+                    Family::Monomakh,
+                    #[cfg(feature = "static")]
                     Family::Monoton,
                     #[cfg(feature = "static")]
                     Family::MooLahLah,
@@ -575,7 +619,7 @@ impl Category {
                     Family::MuseoModerno,
                     #[cfg(feature = "static")]
                     Family::MysteryQuest,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Nabla,
                     #[cfg(feature = "static")]
                     Family::NewRocker,
@@ -644,6 +688,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Playball,
                     #[cfg(feature = "static")]
+                    Family::Pochaevsk,
+                    #[cfg(feature = "static")]
                     Family::PoetsenOne,
                     #[cfg(feature = "static")]
                     Family::PoiretOne,
@@ -651,6 +697,10 @@ impl Category {
                     Family::PollerOne,
                     #[cfg(feature = "static")]
                     Family::Pompiere,
+                    #[cfg(feature = "static")]
+                    Family::Ponnala,
+                    #[cfg(feature = "static")]
+                    Family::Ponomar,
                     #[cfg(feature = "static")]
                     Family::PoorStory,
                     #[cfg(feature = "static")]
@@ -780,7 +830,11 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::SeaweedScript,
                     #[cfg(feature = "static")]
+                    Family::Sekuya,
+                    #[cfg(feature = "static")]
                     Family::Sevillana,
+                    #[cfg(feature = "static")]
+                    Family::Shafarik,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::ShantellSans,
                     #[cfg(feature = "static")]
@@ -838,16 +892,18 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::SyneTactile,
                     #[cfg(feature = "static")]
+                    Family::Tagesschrift,
+                    #[cfg(feature = "static")]
                     Family::Taprom,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Tektur,
                     #[cfg(feature = "static")]
                     Family::Tillana,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::TiltNeon,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::TiltPrism,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::TiltWarp,
                     #[cfg(feature = "static")]
                     Family::TitanOne,
@@ -857,6 +913,8 @@ impl Category {
                     Family::TradeWinds,
                     #[cfg(feature = "static")]
                     Family::TrainOne,
+                    #[cfg(feature = "static")]
+                    Family::Triodion,
                     #[cfg(feature = "static")]
                     Family::Trochut,
                     #[cfg(feature = "static")]
@@ -889,7 +947,7 @@ impl Category {
                     Family::Wallpoet,
                     #[cfg(feature = "static")]
                     Family::Warnes,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Wavefont,
                     #[cfg(feature = "static")]
                     Family::Yarndings12,
@@ -970,6 +1028,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Carattere,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Cause,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Caveat,
                     #[cfg(feature = "static")]
                     Family::CaveatBrush,
@@ -1030,17 +1090,37 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::EastSeaDokdo,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduAUVICWANTArrows,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduAUVICWANTDots,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduAUVICWANTGuides,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduAUVICWANTHand,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduAUVICWANTPre,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduNSWACTCursive,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduNSWACTFoundation,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduNSWACTHandPre,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduQLDBeginner,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduQLDHand,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduSABeginner,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduSAHand,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduTASBeginner,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EduVICWANTBeginner,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduVICWANTHand,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EduVICWANTHandPre,
                     #[cfg(feature = "static")]
                     Family::Engagement,
                     #[cfg(feature = "static")]
@@ -1098,6 +1178,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Hurricane,
                     #[cfg(feature = "static")]
+                    Family::Iansui,
+                    #[cfg(feature = "static")]
                     Family::ImperialScript,
                     #[cfg(feature = "static")]
                     Family::IndieFlower,
@@ -1121,6 +1203,8 @@ impl Category {
                     Family::JustMeAgainDownHere,
                     #[cfg(feature = "static")]
                     Family::Kalam,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Kapakana,
                     #[cfg(feature = "static")]
                     Family::KaushanScript,
                     #[cfg(feature = "static")]
@@ -1256,107 +1340,217 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaypenSans,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::PlaypenSansArabic,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::PlaypenSansDeva,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::PlaypenSansHebrew,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::PlaypenSansThai,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAR,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteARGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAT,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteATGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAUNSW,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteAUNSWGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAUQLD,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteAUQLDGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAUSA,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteAUSAGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAUTAS,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteAUTASGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteAUVIC,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteAUVICGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteBEVLG,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteBEVLGGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteBEWAL,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteBEWALGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteBR,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteBRGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteCA,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteCAGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteCL,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteCLGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteCO,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteCOGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteCU,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteCUGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteCZ,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteCZGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDEGrund,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDEGrundGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDELA,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDELAGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDESAS,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDESASGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDEVA,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDEVAGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDKLoopet,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDKLoopetGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteDKUloopet,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteDKUloopetGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteES,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteESDeco,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteESDecoGuides,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteESGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteFRModerne,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteFRModerneGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteFRTrad,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteFRTradGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteGBJ,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteGBJGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteGBS,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteGBSGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteHR,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteHRGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteHRLijeva,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteHRLijevaGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteHU,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteHUGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteID,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteIDGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteIE,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteIEGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteIN,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteINGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteIS,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteISGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteITModerna,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteITModernaGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteITTrad,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteITTradGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteMX,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteMXGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteNGModern,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteNGModernGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteNL,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteNLGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteNO,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteNOGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteNZ,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteNZGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywritePE,
+                    #[cfg(feature = "static")]
+                    Family::PlaywritePEGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywritePL,
+                    #[cfg(feature = "static")]
+                    Family::PlaywritePLGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywritePT,
+                    #[cfg(feature = "static")]
+                    Family::PlaywritePTGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteRO,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteROGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteSK,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteSKGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteTZ,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteTZGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteUSModern,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteUSModernGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteUSTrad,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteUSTradGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteVN,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteVNGuides,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PlaywriteZA,
+                    #[cfg(feature = "static")]
+                    Family::PlaywriteZAGuides,
                     #[cfg(feature = "static")]
                     Family::Praise,
                     #[cfg(feature = "static")]
@@ -1501,10 +1695,16 @@ impl Category {
                     Family::FiraMono,
                     #[cfg(feature = "static")]
                     Family::FragmentMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::GeistMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::GoogleSansCode,
                     #[cfg(feature = "static")]
                     Family::IBMPlexMono,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Inconsolata,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::IntelOneMono,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::JetBrainsMono,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1513,6 +1713,10 @@ impl Category {
                     Family::LXGWWenKaiMonoTC,
                     #[cfg(feature = "static")]
                     Family::Lekton,
+                    #[cfg(feature = "static")]
+                    Family::LibertinusMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Lilex,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::MPLUS1Code,
                     #[cfg(feature = "static")]
@@ -1537,8 +1741,10 @@ impl Category {
                     Family::RobotoMono,
                     #[cfg(feature = "static")]
                     Family::ShareTechMono,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Sixtyfour,
+                    #[cfg(feature = "variable")]
+                    Family::SixtyfourConvergence,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SometypeMono,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1557,7 +1763,7 @@ impl Category {
                     Family::VT323,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::VictorMono,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Workbench,
                     #[cfg(feature = "static")]
                     Family::XanhMono,
@@ -1581,12 +1787,16 @@ impl Category {
                     Family::AdventPro,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Afacad,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AfacadFlux,
                     #[cfg(feature = "static")]
                     Family::Agdasima,
                     #[cfg(feature = "static")]
                     Family::Akatab,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Akshar,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AlanSans,
                     #[cfg(feature = "static")]
                     Family::Alata,
                     #[cfg(feature = "static")]
@@ -1615,12 +1825,18 @@ impl Category {
                     Family::AlumniSansCollegiateOne,
                     #[cfg(feature = "static")]
                     Family::AlumniSansPinstripe,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AlumniSansSC,
                     #[cfg(feature = "static")]
                     Family::Amaranth,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Amarna,
                     #[cfg(feature = "static")]
                     Family::Amiko,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Anaheim,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AncizarSans,
                     #[cfg(feature = "static")]
                     Family::Andika,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1675,18 +1891,30 @@ impl Category {
                     Family::Asap,
                     #[cfg(feature = "static")]
                     Family::AsapCondensed,
+                    #[cfg(feature = "static")]
+                    Family::Asimovian,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Assistant,
-                    #[cfg(feature = "static")]
-                    Family::Asul,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AstaSans,
                     #[cfg(feature = "static")]
                     Family::Athiti,
                     #[cfg(feature = "static")]
                     Family::AtkinsonHyperlegible,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AtkinsonHyperlegibleMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AtkinsonHyperlegibleNext,
                     #[cfg(feature = "static")]
                     Family::AverageSans,
                     #[cfg(feature = "static")]
                     Family::B612,
+                    #[cfg(feature = "static")]
+                    Family::BBHBartle,
+                    #[cfg(feature = "static")]
+                    Family::BBHBogle,
+                    #[cfg(feature = "static")]
+                    Family::BBHHegarty,
                     #[cfg(feature = "static")]
                     Family::BIZUDGothic,
                     #[cfg(feature = "static")]
@@ -1727,6 +1955,8 @@ impl Category {
                     Family::BricolageGrotesque,
                     #[cfg(feature = "static")]
                     Family::BubblerOne,
+                    #[cfg(feature = "static")]
+                    Family::Bytesized,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Cabin,
                     #[cfg(feature = "static")]
@@ -1737,6 +1967,8 @@ impl Category {
                     Family::Cairo,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::CairoPlay,
+                    #[cfg(feature = "static")]
+                    Family::CalSans,
                     #[cfg(feature = "static")]
                     Family::Cambay,
                     #[cfg(feature = "static")]
@@ -1756,6 +1988,10 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::CarroisGothicSC,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::CascadiaCode,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::CascadiaMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Catamaran,
                     #[cfg(feature = "static")]
                     Family::ChakraPetch,
@@ -1766,6 +2002,10 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::ChauPhilomeneOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ChironGoRoundTC,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ChironHeiHK,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Chivo,
                     #[cfg(feature = "static")]
                     Family::ChocolateClassicalSans,
@@ -1775,6 +2015,10 @@ impl Category {
                     Family::Commissioner,
                     #[cfg(feature = "static")]
                     Family::Convergence,
+                    #[cfg(feature = "static")]
+                    Family::CossetteTexte,
+                    #[cfg(feature = "static")]
+                    Family::CossetteTitre,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Cuprum,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1801,6 +2045,8 @@ impl Category {
                     Family::Dosis,
                     #[cfg(feature = "static")]
                     Family::DotGothic16,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Doto,
                     #[cfg(feature = "static")]
                     Family::DuruSans,
                     #[cfg(feature = "static")]
@@ -1809,6 +2055,8 @@ impl Category {
                     Family::ElMessiri,
                     #[cfg(feature = "static")]
                     Family::Electrolize,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ElmsSans,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::EncodeSans,
                     #[cfg(feature = "static")]
@@ -1826,9 +2074,13 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Epilogue,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EpundaSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Exo,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Exo2,
+                    #[cfg(feature = "static")]
+                    Family::FacultyGlyphic,
                     #[cfg(feature = "static")]
                     Family::Fahkwang,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1856,6 +2108,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Fresca,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::FunnelSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Fustat,
                     #[cfg(feature = "static")]
                     Family::GFSNeohellenic,
@@ -1870,6 +2124,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Gayathri,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Geist,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::GemunuLibre,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Genos,
@@ -1878,13 +2134,21 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Geologica,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Geom,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Georama,
+                    #[cfg(feature = "static")]
+                    Family::Gidole,
                     #[cfg(feature = "static")]
                     Family::Gidugu,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Glory,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::GolosText,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::GoogleSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::GoogleSansFlex,
                     #[cfg(feature = "static")]
                     Family::GothicA1,
                     #[cfg(feature = "static")]
@@ -1895,6 +2159,8 @@ impl Category {
                     Family::Gruppo,
                     #[cfg(feature = "static")]
                     Family::Gudea,
+                    #[cfg(feature = "static")]
+                    Family::Gurajada,
                     #[cfg(feature = "static")]
                     Family::HammersmithOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1912,14 +2178,22 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::HindMadurai,
                     #[cfg(feature = "static")]
+                    Family::HindMysuru,
+                    #[cfg(feature = "static")]
                     Family::HindSiliguri,
                     #[cfg(feature = "static")]
                     Family::HindVadodara,
                     #[cfg(feature = "static")]
                     Family::Homenaje,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::HostGrotesk,
                     #[cfg(feature = "static")]
                     Family::Hubballi,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::HubotSans,
                     #[cfg(feature = "static")]
+                    Family::Huninn,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::IBMPlexSans,
                     #[cfg(feature = "static")]
                     Family::IBMPlexSansArabic,
@@ -1939,7 +2213,7 @@ impl Category {
                     Family::IBMPlexSansThaiLooped,
                     #[cfg(feature = "static")]
                     Family::Imprima,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::InclusiveSans,
                     #[cfg(feature = "static")]
                     Family::Inder,
@@ -1953,6 +2227,8 @@ impl Category {
                     Family::InterTight,
                     #[cfg(feature = "static")]
                     Family::IstokWeb,
+                    #[cfg(feature = "static")]
+                    Family::Italiana,
                     #[cfg(feature = "static")]
                     Family::Jaldi,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -1972,13 +2248,21 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::K2D,
                     #[cfg(feature = "static")]
+                    Family::Kanchenjunga,
+                    #[cfg(feature = "static")]
                     Family::Kanit,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::KantumruyPro,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Karla,
                     #[cfg(feature = "static")]
+                    Family::KarlaTamilInclined,
+                    #[cfg(feature = "static")]
+                    Family::KarlaTamilUpright,
+                    #[cfg(feature = "static")]
                     Family::KdamThmorPro,
+                    #[cfg(feature = "static")]
+                    Family::Kedebideri,
                     #[cfg(feature = "static")]
                     Family::Khand,
                     #[cfg(feature = "static")]
@@ -2003,10 +2287,12 @@ impl Category {
                     Family::Kufam,
                     #[cfg(feature = "static")]
                     Family::KulimPark,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::KumbhSans,
                     #[cfg(feature = "static")]
-                    Family::Laila,
+                    Family::LXGWMarkerGothic,
+                    #[cfg(feature = "static")]
+                    Family::Lalezar,
                     #[cfg(feature = "static")]
                     Family::Lato,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -2029,8 +2315,12 @@ impl Category {
                     Family::LexendTera,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::LexendZetta,
+                    #[cfg(feature = "static")]
+                    Family::LibertinusSans,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::LibreFranklin,
+                    #[cfg(feature = "static")]
+                    Family::Liter,
                     #[cfg(feature = "static")]
                     Family::Livvic,
                     #[cfg(feature = "static")]
@@ -2068,9 +2358,15 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Marvel,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Matangi,
+                    #[cfg(feature = "static")]
+                    Family::Matemasie,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::MavenPro,
                     #[cfg(feature = "static")]
                     Family::MeeraInimai,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Menbere,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::MerriweatherSans,
                     #[cfg(feature = "static")]
@@ -2081,7 +2377,7 @@ impl Category {
                     Family::Mina,
                     #[cfg(feature = "static")]
                     Family::Mingzat,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::MiriamLibre,
                     #[cfg(feature = "static")]
                     Family::Mitr,
@@ -2090,9 +2386,19 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::MochiyPopPOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Moderustic,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Mohave,
                     #[cfg(feature = "static")]
                     Family::Molengo,
+                    #[cfg(feature = "static")]
+                    Family::MomoSignature,
+                    #[cfg(feature = "static")]
+                    Family::MomoTrustDisplay,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::MomoTrustSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::MonaSans,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Monda,
                     #[cfg(feature = "static")]
@@ -2101,14 +2407,18 @@ impl Category {
                     Family::Montserrat,
                     #[cfg(feature = "static")]
                     Family::MontserratAlternates,
-                    #[cfg(feature = "static")]
-                    Family::MontserratSubrayada,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::MontserratUnderline,
                     #[cfg(feature = "static")]
                     Family::Mooli,
                     #[cfg(feature = "static")]
                     Family::Moulpali,
                     #[cfg(feature = "static")]
                     Family::MouseMemoirs,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::MozillaHeadline,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::MozillaText,
                     #[cfg(feature = "static")]
                     Family::Mukta,
                     #[cfg(feature = "static")]
@@ -2126,12 +2436,20 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::NanumGothic,
                     #[cfg(feature = "static")]
+                    Family::Narnoor,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::NataSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::NationalPark,
+                    #[cfg(feature = "static")]
+                    Family::NewAmsterdam,
+                    #[cfg(feature = "static")]
                     Family::NewsCycle,
                     #[cfg(feature = "static")]
                     Family::Niramit,
                     #[cfg(feature = "static")]
                     Family::Nobile,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Nokora,
                     #[cfg(feature = "static")]
                     Family::Notable,
@@ -2406,6 +2724,8 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansSundanese,
                     #[cfg(feature = "static")]
+                    Family::NotoSansSunuwar,
+                    #[cfg(feature = "static")]
                     Family::NotoSansSylotiNagri,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansSymbols,
@@ -2415,6 +2735,8 @@ impl Category {
                     Family::NotoSansSyriac,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansSyriacEastern,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::NotoSansSyriacWestern,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansTC,
                     #[cfg(feature = "static")]
@@ -2441,7 +2763,7 @@ impl Category {
                     Family::NotoSansThaana,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansThai,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSansThaiLooped,
                     #[cfg(feature = "static")]
                     Family::NotoSansTifinagh,
@@ -2469,7 +2791,7 @@ impl Category {
                     Family::Numans,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Nunito,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::NunitoSans,
                     #[cfg(feature = "static")]
                     Family::NuosuSIL,
@@ -2506,6 +2828,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::PalanquinDark,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Parkinsans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::PathwayExtreme,
                     #[cfg(feature = "static")]
                     Family::PathwayGothicOne,
@@ -2515,6 +2839,8 @@ impl Category {
                     Family::Pavanam,
                     #[cfg(feature = "static")]
                     Family::PaytoneOne,
+                    #[cfg(feature = "static")]
+                    Family::Phetsarath,
                     #[cfg(feature = "static")]
                     Family::Philosopher,
                     #[cfg(feature = "static")]
@@ -2585,11 +2911,11 @@ impl Category {
                     Family::ReemKufiInk,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::RethinkSans,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Roboto,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::RobotoCondensed,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::RobotoFlex,
                     #[cfg(feature = "static")]
                     Family::RocknRollOne,
@@ -2610,6 +2936,10 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::RussoOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::SUSE,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::SUSEMono,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Saira,
                     #[cfg(feature = "static")]
                     Family::SairaCondensed,
@@ -2618,6 +2948,10 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::SairaSemiCondensed,
                     #[cfg(feature = "static")]
+                    Family::SankofaDisplay,
+                    #[cfg(feature = "static")]
+                    Family::Sansation,
+                    #[cfg(feature = "static")]
                     Family::Sansita,
                     #[cfg(feature = "static")]
                     Family::Sarabun,
@@ -2625,12 +2959,16 @@ impl Category {
                     Family::Sarala,
                     #[cfg(feature = "static")]
                     Family::Sarpanch,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Savate,
                     #[cfg(feature = "static")]
                     Family::SawarabiGothic,
                     #[cfg(feature = "static")]
                     Family::Scada,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SchibstedGrotesk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ScienceGothic,
                     #[cfg(feature = "static")]
                     Family::SecularOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -2656,6 +2994,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Sintony,
                     #[cfg(feature = "static")]
+                    Family::Sirivennela,
+                    #[cfg(feature = "static")]
                     Family::SixCaps,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SmoochSans,
@@ -2674,17 +3014,33 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Sora,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::SourGummy,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SourceSans3,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SpaceGrotesk,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::SpecialGothic,
+                    #[cfg(feature = "static")]
+                    Family::SpecialGothicCondensedOne,
+                    #[cfg(feature = "static")]
+                    Family::SpecialGothicExpandedOne,
                     #[cfg(feature = "static")]
                     Family::Spinnaker,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::SplineSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::StackSansHeadline,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::StackSansNotch,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::StackSansText,
                     #[cfg(feature = "static")]
                     Family::Stick,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::StickNoBills,
+                    #[cfg(feature = "static")]
+                    Family::StoryScript,
                     #[cfg(feature = "static")]
                     Family::Strait,
                     #[cfg(feature = "static")]
@@ -2697,6 +3053,10 @@ impl Category {
                     Family::Syncopate,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Syne,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::TASAExplorer,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::TASAOrbiter,
                     #[cfg(feature = "static")]
                     Family::TacOne,
                     #[cfg(feature = "static")]
@@ -2717,10 +3077,14 @@ impl Category {
                     Family::TextMeOne,
                     #[cfg(feature = "static")]
                     Family::Thasadith,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::TikTokSans,
                     #[cfg(feature = "static")]
                     Family::Timmana,
                     #[cfg(feature = "static")]
                     Family::Tiny5,
+                    #[cfg(feature = "static")]
+                    Family::Tirra,
                     #[cfg(feature = "static")]
                     Family::TitilliumWeb,
                     #[cfg(feature = "static")]
@@ -2731,6 +3095,8 @@ impl Category {
                     Family::Truculenta,
                     #[cfg(feature = "static")]
                     Family::TsukimiRounded,
+                    #[cfg(feature = "static")]
+                    Family::Tuffy,
                     #[cfg(feature = "static")]
                     Family::Ubuntu,
                     #[cfg(feature = "static")]
@@ -2749,6 +3115,8 @@ impl Category {
                     Family::Varta,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Vazirmatn,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::VendSans,
                     #[cfg(feature = "static")]
                     Family::Viga,
                     #[cfg(feature = "static")]
@@ -2756,7 +3124,17 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Voltaire,
                     #[cfg(feature = "static")]
+                    Family::WDXLLubrifontJPN,
+                    #[cfg(feature = "static")]
+                    Family::WDXLLubrifontSC,
+                    #[cfg(feature = "static")]
+                    Family::WDXLLubrifontTC,
+                    #[cfg(feature = "static")]
                     Family::WendyOne,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::WinkyRough,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::WinkySans,
                     #[cfg(feature = "static")]
                     Family::WireOne,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -2789,6 +3167,12 @@ impl Category {
                     Family::ZCOOLXiaoWei,
                     #[cfg(feature = "static")]
                     Family::Zain,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ZalandoSans,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ZalandoSansExpanded,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ZalandoSansSemiExpanded,
                     #[cfg(feature = "static")]
                     Family::ZenKakuGothicAntique,
                     #[cfg(feature = "static")]
@@ -2832,6 +3216,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::AmiriQuran,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::AncizarSerif,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::AndadaPro,
                     #[cfg(feature = "static")]
                     Family::AnnapurnaSIL,
@@ -2858,6 +3244,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Asar,
                     #[cfg(feature = "static")]
+                    Family::Asul,
+                    #[cfg(feature = "static")]
                     Family::Average,
                     #[cfg(feature = "static")]
                     Family::BIZUDMincho,
@@ -2867,9 +3255,9 @@ impl Category {
                     Family::BacasimeAntique,
                     #[cfg(feature = "static")]
                     Family::Balthazar,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Baskervville,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::BaskervvilleSC,
                     #[cfg(feature = "static")]
                     Family::Belgrano,
@@ -2905,7 +3293,7 @@ impl Category {
                     Family::BreeSerif,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Brygada1918,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Buenard,
                     #[cfg(feature = "static")]
                     Family::CactusClassicalSerif,
@@ -2924,14 +3312,16 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::CharisSIL,
                     #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::ChironSungHK,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Cinzel,
                     #[cfg(feature = "static")]
                     Family::Copse,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Cormorant,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::CormorantGaramond,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::CormorantInfant,
                     #[cfg(feature = "static")]
                     Family::CormorantSC,
@@ -2955,7 +3345,7 @@ impl Category {
                     Family::DMSerifText,
                     #[cfg(feature = "static")]
                     Family::DaiBannaSIL,
-                    #[cfg(any(feature = "variable", feature = "static"))]
+                    #[cfg(feature = "variable")]
                     Family::Danfo,
                     #[cfg(feature = "static")]
                     Family::DavidLibre,
@@ -2973,6 +3363,8 @@ impl Category {
                     Family::Eczar,
                     #[cfg(feature = "static")]
                     Family::Enriqueta,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::EpundaSlab,
                     #[cfg(feature = "static")]
                     Family::Esteban,
                     #[cfg(feature = "static")]
@@ -3020,14 +3412,12 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Gupter,
                     #[cfg(feature = "static")]
-                    Family::Gurajada,
-                    #[cfg(feature = "static")]
                     Family::Habibi,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Hahmlet,
                     #[cfg(feature = "static")]
                     Family::Halant,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Hanuman,
                     #[cfg(feature = "static")]
                     Family::HeadlandOne,
@@ -3074,8 +3464,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::InstrumentSerif,
                     #[cfg(feature = "static")]
-                    Family::Italiana,
-                    #[cfg(feature = "static")]
                     Family::JacquesFrancois,
                     #[cfg(feature = "static")]
                     Family::Joan,
@@ -3118,10 +3506,14 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Labrada,
                     #[cfg(feature = "static")]
+                    Family::Laila,
+                    #[cfg(feature = "static")]
                     Family::Lateef,
                     #[cfg(feature = "static")]
                     Family::Ledger,
                     #[cfg(feature = "static")]
+                    Family::LibertinusSerif,
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::LibreBaskerville,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::LibreBodoni,
@@ -3163,7 +3555,7 @@ impl Category {
                     Family::Mate,
                     #[cfg(feature = "static")]
                     Family::MateSC,
-                    #[cfg(feature = "static")]
+                    #[cfg(any(feature = "variable", feature = "static"))]
                     Family::Merriweather,
                     #[cfg(feature = "static")]
                     Family::Mirza,
@@ -3175,8 +3567,6 @@ impl Category {
                     Family::Namdhinggo,
                     #[cfg(feature = "static")]
                     Family::NanumMyeongjo,
-                    #[cfg(feature = "static")]
-                    Family::Narnoor,
                     #[cfg(feature = "static")]
                     Family::Neuton,
                     #[cfg(feature = "static")]
@@ -3206,6 +3596,8 @@ impl Category {
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifDisplay,
                     #[cfg(feature = "static")]
+                    Family::NotoSerifDivesAkuru,
+                    #[cfg(feature = "static")]
                     Family::NotoSerifDogra,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifEthiopic,
@@ -3221,6 +3613,8 @@ impl Category {
                     Family::NotoSerifHK,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifHebrew,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::NotoSerifHentaigana,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifJP,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -3265,6 +3659,8 @@ impl Category {
                     Family::NotoSerifThai,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifTibetan,
+                    #[cfg(feature = "static")]
+                    Family::NotoSerifTodhri,
                     #[cfg(any(feature = "variable", feature = "static"))]
                     Family::NotoSerifToto,
                     #[cfg(any(feature = "variable", feature = "static"))]
@@ -3285,6 +3681,8 @@ impl Category {
                     Family::PTSerifCaption,
                     #[cfg(feature = "static")]
                     Family::PadyakkeExpandedOne,
+                    #[cfg(any(feature = "variable", feature = "static"))]
+                    Family::Parastoo,
                     #[cfg(feature = "static")]
                     Family::Peddana,
                     #[cfg(feature = "static")]
@@ -3436,6 +3834,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Family::Unna,
                     #[cfg(feature = "static")]
+                    Family::UoqMunThenKhung,
+                    #[cfg(feature = "static")]
                     Family::VastShadow,
                     #[cfg(feature = "static")]
                     Family::VesperLibre,
@@ -3489,6 +3889,8 @@ impl Category {
                     Font::AbrilFatfaceRegular,
                     #[cfg(feature = "static")]
                     Font::AgbalumoRegular,
+                    #[cfg(feature = "variable")]
+                    Font::AguDisplayRegularVariable,
                     #[cfg(feature = "static")]
                     Font::AkayaKanadakaRegular,
                     #[cfg(feature = "static")]
@@ -3894,6 +4296,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AveriaSerifLibreBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::BadeenDisplayRegular,
+                    #[cfg(feature = "static")]
                     Font::BagelFatOneRegular,
                     #[cfg(feature = "static")]
                     Font::BahianaRegular,
@@ -4072,129 +4476,633 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::BellotaTextBoldItalic,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayThin,
+                    Font::BigShouldersThin,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayExtraLight,
+                    Font::BigShouldersExtraLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayLight,
+                    Font::BigShouldersLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayRegular,
+                    Font::BigShouldersRegular,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayMedium,
+                    Font::BigShouldersMedium,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplaySemiBold,
+                    Font::BigShouldersSemiBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayBold,
+                    Font::BigShouldersBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayExtraBold,
+                    Font::BigShouldersExtraBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersDisplayBlack,
+                    Font::BigShouldersBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders18ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders36ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShoulders60ptBlack,
                     #[cfg(feature = "variable")]
-                    Font::BigShouldersDisplayVariable,
+                    Font::BigShouldersVariable,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayThin,
+                    Font::BigShouldersInlineThin,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayExtraLight,
+                    Font::BigShouldersInlineExtraLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayLight,
+                    Font::BigShouldersInlineLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayRegular,
+                    Font::BigShouldersInlineRegular,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayMedium,
+                    Font::BigShouldersInlineMedium,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplaySemiBold,
+                    Font::BigShouldersInlineSemiBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayBold,
+                    Font::BigShouldersInlineBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayExtraBold,
+                    Font::BigShouldersInlineExtraBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineDisplayBlack,
+                    Font::BigShouldersInlineBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline18ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline36ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersInline60ptBlack,
                     #[cfg(feature = "variable")]
-                    Font::BigShouldersInlineDisplayVariable,
+                    Font::BigShouldersInlineVariable,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextThin,
+                    Font::BigShouldersStencilThin,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextExtraLight,
+                    Font::BigShouldersStencilExtraLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextLight,
+                    Font::BigShouldersStencilLight,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextRegular,
+                    Font::BigShouldersStencilRegular,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextMedium,
+                    Font::BigShouldersStencilMedium,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextSemiBold,
+                    Font::BigShouldersStencilSemiBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextBold,
+                    Font::BigShouldersStencilBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextExtraBold,
+                    Font::BigShouldersStencilExtraBold,
                     #[cfg(feature = "static")]
-                    Font::BigShouldersInlineTextBlack,
+                    Font::BigShouldersStencilBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil18ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil36ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptThin,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptLight,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BigShouldersStencil60ptBlack,
                     #[cfg(feature = "variable")]
-                    Font::BigShouldersInlineTextVariable,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayThin,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayRegular,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayMedium,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplaySemiBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilDisplayBlack,
-                    #[cfg(feature = "variable")]
-                    Font::BigShouldersStencilDisplayVariable,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextThin,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextRegular,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextMedium,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersStencilTextBlack,
-                    #[cfg(feature = "variable")]
-                    Font::BigShouldersStencilTextVariable,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextThin,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextLight,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextRegular,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextMedium,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::BigShouldersTextBlack,
-                    #[cfg(feature = "variable")]
-                    Font::BigShouldersTextVariable,
+                    Font::BigShouldersStencilVariable,
                     #[cfg(feature = "static")]
                     Font::BigelowRulesRegular,
                     #[cfg(feature = "static")]
                     Font::BigshotOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountVariable,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridDoubleCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountGridDoubleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountGridDoubleInkVariable,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountGridSingleCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountGridSingleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountGridSingleInkVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountInkVariable,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropDoubleCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountPropDoubleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountPropDoubleInkVariable,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountPropSingleCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountPropSingleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountPropSingleInkVariable,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRomanBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleBlack,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveThin,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveLight,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::BitcountSingleCursiveBlack,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountSingleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BitcountSingleInkVariable,
                     #[cfg(feature = "static")]
                     Font::BlackAndWhitePictureRegular,
                     #[cfg(feature = "static")]
@@ -4207,6 +5115,8 @@ impl Category {
                     Font::BlakaInkRegular,
                     #[cfg(feature = "static")]
                     Font::BokorRegular,
+                    #[cfg(feature = "static")]
+                    Font::BoldonseRegular,
                     #[cfg(feature = "static")]
                     Font::BoogalooRegular,
                     #[cfg(feature = "static")]
@@ -4233,6 +5143,8 @@ impl Category {
                     Font::BungeeShadeRegular,
                     #[cfg(feature = "static")]
                     Font::BungeeSpiceRegular,
+                    #[cfg(feature = "static")]
+                    Font::BungeeTintRegular,
                     #[cfg(feature = "static")]
                     Font::ButchermanRegular,
                     #[cfg(feature = "static")]
@@ -4285,8 +5197,6 @@ impl Category {
                     Font::CinzelDecorativeBold,
                     #[cfg(feature = "static")]
                     Font::CinzelDecorativeBlack,
-                    #[cfg(feature = "static")]
-                    Font::ClimateCrisisRegular,
                     #[cfg(feature = "variable")]
                     Font::ClimateCrisisRegularVariable,
                     #[cfg(feature = "static")]
@@ -4314,6 +5224,10 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::ComfortaaVariable,
                     #[cfg(feature = "static")]
+                    Font::ComicReliefRegular,
+                    #[cfg(feature = "static")]
+                    Font::ComicReliefBold,
+                    #[cfg(feature = "static")]
                     Font::ConcertOneRegular,
                     #[cfg(feature = "static")]
                     Font::ContentRegular,
@@ -4321,6 +5235,8 @@ impl Category {
                     Font::ContentBold,
                     #[cfg(feature = "static")]
                     Font::ContrailOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::CoralPixelsRegular,
                     #[cfg(feature = "static")]
                     Font::CorbenRegular,
                     #[cfg(feature = "static")]
@@ -4391,6 +5307,8 @@ impl Category {
                     Font::EricaOneRegular,
                     #[cfg(feature = "static")]
                     Font::EwertRegular,
+                    #[cfg(feature = "static")]
+                    Font::ExileRegular,
                     #[cfg(feature = "static")]
                     Font::ExpletusSansRegular,
                     #[cfg(feature = "static")]
@@ -4477,6 +5395,20 @@ impl Category {
                     Font::FrukturItalic,
                     #[cfg(feature = "static")]
                     Font::FugazOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplayLight,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplayRegular,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplayMedium,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplaySemiBold,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplayBold,
+                    #[cfg(feature = "static")]
+                    Font::FunnelDisplayExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::FunnelDisplayVariable,
                     #[cfg(feature = "static")]
                     Font::GaMaamliRegular,
                     #[cfg(feature = "static")]
@@ -4635,8 +5567,6 @@ impl Category {
                     Font::HappyMonkeyRegular,
                     #[cfg(feature = "static")]
                     Font::HennyPennyRegular,
-                    #[cfg(feature = "static")]
-                    Font::HonkRegular,
                     #[cfg(feature = "variable")]
                     Font::HonkRegularVariable,
                     #[cfg(feature = "static")]
@@ -4685,8 +5615,6 @@ impl Category {
                     Font::JomhuriaRegular,
                     #[cfg(feature = "static")]
                     Font::JotiOneRegular,
-                    #[cfg(feature = "static")]
-                    Font::KablammoRegular,
                     #[cfg(feature = "variable")]
                     Font::KablammoRegularVariable,
                     #[cfg(feature = "static")]
@@ -4766,8 +5694,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::LacquerRegular,
                     #[cfg(feature = "static")]
-                    Font::LalezarRegular,
-                    #[cfg(feature = "static")]
                     Font::LancelotRegular,
                     #[cfg(feature = "static")]
                     Font::LangarRegular,
@@ -4785,6 +5711,12 @@ impl Category {
                     Font::LemonadaBold,
                     #[cfg(feature = "variable")]
                     Font::LemonadaVariable,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusKeyboardRegular,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusMathRegular,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifDisplayRegular,
                     #[cfg(feature = "static")]
                     Font::LibreBarcode128Regular,
                     #[cfg(feature = "static")]
@@ -5028,6 +5960,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::MacondoSwashCapsRegular,
                     #[cfg(feature = "static")]
+                    Font::ManufacturingConsentRegular,
+                    #[cfg(feature = "static")]
                     Font::MargarineRegular,
                     #[cfg(feature = "static")]
                     Font::MarheyLight,
@@ -5075,6 +6009,8 @@ impl Category {
                     Font::MograRegular,
                     #[cfg(feature = "static")]
                     Font::MoiraiOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonomakhRegular,
                     #[cfg(feature = "static")]
                     Font::MonotonRegular,
                     #[cfg(feature = "static")]
@@ -5127,8 +6063,6 @@ impl Category {
                     Font::MuseoModernoItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MysteryQuestRegular,
-                    #[cfg(feature = "static")]
-                    Font::NablaRegular,
                     #[cfg(feature = "variable")]
                     Font::NablaRegularVariable,
                     #[cfg(feature = "static")]
@@ -5254,6 +6188,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PlayballRegular,
                     #[cfg(feature = "static")]
+                    Font::PochaevskRegular,
+                    #[cfg(feature = "static")]
                     Font::PoetsenOneRegular,
                     #[cfg(feature = "static")]
                     Font::PoiretOneRegular,
@@ -5261,6 +6197,10 @@ impl Category {
                     Font::PollerOneRegular,
                     #[cfg(feature = "static")]
                     Font::PompiereRegular,
+                    #[cfg(feature = "static")]
+                    Font::PonnalaRegular,
+                    #[cfg(feature = "static")]
+                    Font::PonomarRegular,
                     #[cfg(feature = "static")]
                     Font::PoorStoryRegular,
                     #[cfg(feature = "static")]
@@ -5424,7 +6364,11 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::SeaweedScriptRegular,
                     #[cfg(feature = "static")]
+                    Font::SekuyaRegular,
+                    #[cfg(feature = "static")]
                     Font::SevillanaRegular,
+                    #[cfg(feature = "static")]
+                    Font::ShafarikRegular,
                     #[cfg(feature = "static")]
                     Font::ShantellSansLight,
                     #[cfg(feature = "static")]
@@ -5524,6 +6468,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::SyneTactileRegular,
                     #[cfg(feature = "static")]
+                    Font::TagesschriftRegular,
+                    #[cfg(feature = "static")]
                     Font::TapromRegular,
                     #[cfg(feature = "static")]
                     Font::TekturCondensedRegular,
@@ -5573,16 +6519,10 @@ impl Category {
                     Font::TillanaBold,
                     #[cfg(feature = "static")]
                     Font::TillanaExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::TiltNeonRegular,
                     #[cfg(feature = "variable")]
                     Font::TiltNeonRegularVariable,
-                    #[cfg(feature = "static")]
-                    Font::TiltPrismRegular,
                     #[cfg(feature = "variable")]
                     Font::TiltPrismRegularVariable,
-                    #[cfg(feature = "static")]
-                    Font::TiltWarpRegular,
                     #[cfg(feature = "variable")]
                     Font::TiltWarpRegularVariable,
                     #[cfg(feature = "static")]
@@ -5776,6 +6716,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::TrainOneRegular,
                     #[cfg(feature = "static")]
+                    Font::TriodionRegular,
+                    #[cfg(feature = "static")]
                     Font::TrochutRegular,
                     #[cfg(feature = "static")]
                     Font::TrochutItalic,
@@ -5823,24 +6765,6 @@ impl Category {
                     Font::WallpoetRegular,
                     #[cfg(feature = "static")]
                     Font::WarnesRegular,
-                    #[cfg(feature = "static")]
-                    Font::WavefontThin,
-                    #[cfg(feature = "static")]
-                    Font::WavefontExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::WavefontLight,
-                    #[cfg(feature = "static")]
-                    Font::WavefontRegular,
-                    #[cfg(feature = "static")]
-                    Font::WavefontMedium,
-                    #[cfg(feature = "static")]
-                    Font::WavefontSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::WavefontBold,
-                    #[cfg(feature = "static")]
-                    Font::WavefontExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::WavefontBlack,
                     #[cfg(feature = "variable")]
                     Font::WavefontVariable,
                     #[cfg(feature = "static")]
@@ -5938,6 +6862,26 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::CarattereRegular,
                     #[cfg(feature = "static")]
+                    Font::CauseThin,
+                    #[cfg(feature = "static")]
+                    Font::CauseExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::CauseLight,
+                    #[cfg(feature = "static")]
+                    Font::CauseRegular,
+                    #[cfg(feature = "static")]
+                    Font::CauseMedium,
+                    #[cfg(feature = "static")]
+                    Font::CauseSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::CauseBold,
+                    #[cfg(feature = "static")]
+                    Font::CauseExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::CauseBlack,
+                    #[cfg(feature = "variable")]
+                    Font::CauseVariable,
+                    #[cfg(feature = "static")]
                     Font::CaveatRegular,
                     #[cfg(feature = "static")]
                     Font::CaveatMedium,
@@ -6032,6 +6976,36 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::EastSeaDokdoRegular,
                     #[cfg(feature = "static")]
+                    Font::EduAUVICWANTArrowsRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTArrowsMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTArrowsSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTArrowsBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduAUVICWANTArrowsVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTDotsRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTDotsMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTDotsSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTDotsBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduAUVICWANTDotsVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTGuidesRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTGuidesMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTGuidesSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTGuidesBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduAUVICWANTGuidesVariable,
+                    #[cfg(feature = "static")]
                     Font::EduAUVICWANTHandRegular,
                     #[cfg(feature = "static")]
                     Font::EduAUVICWANTHandMedium,
@@ -6041,6 +7015,26 @@ impl Category {
                     Font::EduAUVICWANTHandBold,
                     #[cfg(feature = "variable")]
                     Font::EduAUVICWANTHandVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTPreRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTPreMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTPreSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduAUVICWANTPreBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduAUVICWANTPreVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTCursiveRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTCursiveMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTCursiveSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTCursiveBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduNSWACTCursiveVariable,
                     #[cfg(feature = "static")]
                     Font::EduNSWACTFoundationRegular,
                     #[cfg(feature = "static")]
@@ -6052,6 +7046,16 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::EduNSWACTFoundationVariable,
                     #[cfg(feature = "static")]
+                    Font::EduNSWACTHandPreRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTHandPreMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTHandPreSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduNSWACTHandPreBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduNSWACTHandPreVariable,
+                    #[cfg(feature = "static")]
                     Font::EduQLDBeginnerRegular,
                     #[cfg(feature = "static")]
                     Font::EduQLDBeginnerMedium,
@@ -6062,6 +7066,16 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::EduQLDBeginnerVariable,
                     #[cfg(feature = "static")]
+                    Font::EduQLDHandRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduQLDHandMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduQLDHandSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduQLDHandBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduQLDHandVariable,
+                    #[cfg(feature = "static")]
                     Font::EduSABeginnerRegular,
                     #[cfg(feature = "static")]
                     Font::EduSABeginnerMedium,
@@ -6071,6 +7085,16 @@ impl Category {
                     Font::EduSABeginnerBold,
                     #[cfg(feature = "variable")]
                     Font::EduSABeginnerVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduSAHandRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduSAHandMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduSAHandSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduSAHandBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduSAHandVariable,
                     #[cfg(feature = "static")]
                     Font::EduTASBeginnerRegular,
                     #[cfg(feature = "static")]
@@ -6091,6 +7115,26 @@ impl Category {
                     Font::EduVICWANTBeginnerBold,
                     #[cfg(feature = "variable")]
                     Font::EduVICWANTBeginnerVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduVICWANTHandVariable,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandPreRegular,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandPreMedium,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandPreSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EduVICWANTHandPreBold,
+                    #[cfg(feature = "variable")]
+                    Font::EduVICWANTHandPreVariable,
                     #[cfg(feature = "static")]
                     Font::EngagementRegular,
                     #[cfg(feature = "static")]
@@ -6158,6 +7202,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::HurricaneRegular,
                     #[cfg(feature = "static")]
+                    Font::IansuiRegular,
+                    #[cfg(feature = "static")]
                     Font::ImperialScriptRegular,
                     #[cfg(feature = "static")]
                     Font::IndieFlowerRegular,
@@ -6185,6 +7231,12 @@ impl Category {
                     Font::KalamRegular,
                     #[cfg(feature = "static")]
                     Font::KalamBold,
+                    #[cfg(feature = "static")]
+                    Font::KapakanaLight,
+                    #[cfg(feature = "static")]
+                    Font::KapakanaRegular,
+                    #[cfg(feature = "variable")]
+                    Font::KapakanaVariable,
                     #[cfg(feature = "static")]
                     Font::KaushanScriptRegular,
                     #[cfg(feature = "static")]
@@ -6380,6 +7432,78 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaypenSansVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicThin,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicMedium,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansArabicExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::PlaypenSansArabicVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaThin,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaMedium,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansDevaExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::PlaypenSansDevaVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewThin,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewMedium,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansHebrewExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::PlaypenSansHebrewVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiThin,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiLight,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiMedium,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiBold,
+                    #[cfg(feature = "static")]
+                    Font::PlaypenSansThaiExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::PlaypenSansThaiVariable,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteARThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteARExtraLight,
@@ -6389,6 +7513,8 @@ impl Category {
                     Font::PlaywriteARRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteARVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteARGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteATThin,
                     #[cfg(feature = "static")]
@@ -6410,6 +7536,10 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteATItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteATGuidesRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteATGuidesItalic,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteAUNSWThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteAUNSWExtraLight,
@@ -6419,6 +7549,8 @@ impl Category {
                     Font::PlaywriteAUNSWRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteAUNSWVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteAUNSWGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteAUQLDThin,
                     #[cfg(feature = "static")]
@@ -6430,6 +7562,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteAUQLDVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteAUQLDGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteAUSAThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteAUSAExtraLight,
@@ -6439,6 +7573,8 @@ impl Category {
                     Font::PlaywriteAUSARegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteAUSAVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteAUSAGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteAUTASThin,
                     #[cfg(feature = "static")]
@@ -6450,6 +7586,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteAUTASVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteAUTASGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteAUVICThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteAUVICExtraLight,
@@ -6459,6 +7597,8 @@ impl Category {
                     Font::PlaywriteAUVICRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteAUVICVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteAUVICGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteBEVLGThin,
                     #[cfg(feature = "static")]
@@ -6470,6 +7610,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteBEVLGVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteBEVLGGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteBEWALThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteBEWALExtraLight,
@@ -6479,6 +7621,8 @@ impl Category {
                     Font::PlaywriteBEWALRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteBEWALVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteBEWALGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteBRThin,
                     #[cfg(feature = "static")]
@@ -6490,6 +7634,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteBRVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteBRGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteCAThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteCAExtraLight,
@@ -6499,6 +7645,8 @@ impl Category {
                     Font::PlaywriteCARegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteCAVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteCAGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteCLThin,
                     #[cfg(feature = "static")]
@@ -6510,6 +7658,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteCLVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteCLGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteCOThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteCOExtraLight,
@@ -6519,6 +7669,8 @@ impl Category {
                     Font::PlaywriteCORegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteCOVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteCOGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteCUThin,
                     #[cfg(feature = "static")]
@@ -6530,6 +7682,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteCUVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteCUGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteCZThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteCZExtraLight,
@@ -6539,6 +7693,8 @@ impl Category {
                     Font::PlaywriteCZRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteCZVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteCZGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDEGrundThin,
                     #[cfg(feature = "static")]
@@ -6550,6 +7706,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDEGrundVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteDEGrundGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteDELAThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDELAExtraLight,
@@ -6559,6 +7717,8 @@ impl Category {
                     Font::PlaywriteDELARegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDELAVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteDELAGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDESASThin,
                     #[cfg(feature = "static")]
@@ -6570,6 +7730,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDESASVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteDESASGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteDEVAThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDEVAExtraLight,
@@ -6579,6 +7741,8 @@ impl Category {
                     Font::PlaywriteDEVARegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDEVAVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteDEVAGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDKLoopetThin,
                     #[cfg(feature = "static")]
@@ -6590,6 +7754,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDKLoopetVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteDKLoopetGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteDKUloopetThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteDKUloopetExtraLight,
@@ -6599,6 +7765,8 @@ impl Category {
                     Font::PlaywriteDKUloopetRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteDKUloopetVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteDKUloopetGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteESThin,
                     #[cfg(feature = "static")]
@@ -6620,6 +7788,10 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteESDecoVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteESDecoGuidesRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteESGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteFRModerneThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteFRModerneExtraLight,
@@ -6630,6 +7802,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteFRModerneVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteFRModerneGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteFRTradThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteFRTradExtraLight,
@@ -6639,6 +7813,8 @@ impl Category {
                     Font::PlaywriteFRTradRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteFRTradVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteFRTradGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteGBJThin,
                     #[cfg(feature = "static")]
@@ -6660,6 +7836,10 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteGBJItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteGBJGuidesRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteGBJGuidesItalic,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteGBSThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteGBSExtraLight,
@@ -6680,6 +7860,10 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteGBSItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteGBSGuidesRegular,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteGBSGuidesItalic,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteHRThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteHRExtraLight,
@@ -6689,6 +7873,8 @@ impl Category {
                     Font::PlaywriteHRRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteHRVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteHRGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteHRLijevaThin,
                     #[cfg(feature = "static")]
@@ -6700,6 +7886,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteHRLijevaVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteHRLijevaGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteHUThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteHUExtraLight,
@@ -6709,6 +7897,8 @@ impl Category {
                     Font::PlaywriteHURegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteHUVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteHUGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteIDThin,
                     #[cfg(feature = "static")]
@@ -6720,6 +7910,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteIDVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteIDGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteIEThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteIEExtraLight,
@@ -6729,6 +7921,8 @@ impl Category {
                     Font::PlaywriteIERegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteIEVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteIEGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteINThin,
                     #[cfg(feature = "static")]
@@ -6740,6 +7934,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteINVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteINGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteISThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteISExtraLight,
@@ -6749,6 +7945,8 @@ impl Category {
                     Font::PlaywriteISRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteISVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteISGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteITModernaThin,
                     #[cfg(feature = "static")]
@@ -6760,6 +7958,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteITModernaVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteITModernaGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteITTradThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteITTradExtraLight,
@@ -6769,6 +7969,8 @@ impl Category {
                     Font::PlaywriteITTradRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteITTradVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteITTradGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteMXThin,
                     #[cfg(feature = "static")]
@@ -6780,6 +7982,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteMXVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteMXGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteNGModernThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteNGModernExtraLight,
@@ -6789,6 +7993,8 @@ impl Category {
                     Font::PlaywriteNGModernRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteNGModernVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteNGModernGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteNLThin,
                     #[cfg(feature = "static")]
@@ -6800,6 +8006,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteNLVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteNLGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteNOThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteNOExtraLight,
@@ -6809,6 +8017,8 @@ impl Category {
                     Font::PlaywriteNORegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteNOVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteNOGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteNZThin,
                     #[cfg(feature = "static")]
@@ -6820,6 +8030,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteNZVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteNZGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywritePEThin,
                     #[cfg(feature = "static")]
                     Font::PlaywritePEExtraLight,
@@ -6829,6 +8041,8 @@ impl Category {
                     Font::PlaywritePERegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywritePEVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywritePEGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywritePLThin,
                     #[cfg(feature = "static")]
@@ -6840,6 +8054,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywritePLVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywritePLGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywritePTThin,
                     #[cfg(feature = "static")]
                     Font::PlaywritePTExtraLight,
@@ -6849,6 +8065,8 @@ impl Category {
                     Font::PlaywritePTRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywritePTVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywritePTGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteROThin,
                     #[cfg(feature = "static")]
@@ -6860,6 +8078,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteROVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteROGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteSKThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteSKExtraLight,
@@ -6869,6 +8089,8 @@ impl Category {
                     Font::PlaywriteSKRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteSKVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteSKGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteTZThin,
                     #[cfg(feature = "static")]
@@ -6880,6 +8102,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteTZVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteTZGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteUSModernThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteUSModernExtraLight,
@@ -6889,6 +8113,8 @@ impl Category {
                     Font::PlaywriteUSModernRegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteUSModernVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteUSModernGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PlaywriteUSTradThin,
                     #[cfg(feature = "static")]
@@ -6900,6 +8126,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteUSTradVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteUSTradGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteVNThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteVNExtraLight,
@@ -6910,6 +8138,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::PlaywriteVNVariable,
                     #[cfg(feature = "static")]
+                    Font::PlaywriteVNGuidesRegular,
+                    #[cfg(feature = "static")]
                     Font::PlaywriteZAThin,
                     #[cfg(feature = "static")]
                     Font::PlaywriteZAExtraLight,
@@ -6919,6 +8149,8 @@ impl Category {
                     Font::PlaywriteZARegular,
                     #[cfg(feature = "variable")]
                     Font::PlaywriteZAVariable,
+                    #[cfg(feature = "static")]
+                    Font::PlaywriteZAGuidesRegular,
                     #[cfg(feature = "static")]
                     Font::PraiseRegular,
                     #[cfg(feature = "static")]
@@ -7198,6 +8430,54 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::FragmentMonoItalic,
                     #[cfg(feature = "static")]
+                    Font::GeistMonoThin,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoLight,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoMedium,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistMonoBlack,
+                    #[cfg(feature = "variable")]
+                    Font::GeistMonoVariable,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansCodeExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::GoogleSansCodeVariable,
+                    #[cfg(feature = "variable")]
+                    Font::GoogleSansCodeItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::IBMPlexMonoThin,
                     #[cfg(feature = "static")]
                     Font::IBMPlexMonoThinItalic,
@@ -7372,6 +8652,30 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::InconsolataVariable,
                     #[cfg(feature = "static")]
+                    Font::IntelOneMonoLight,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoItalic,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoMedium,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoBold,
+                    #[cfg(feature = "static")]
+                    Font::IntelOneMonoBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::IntelOneMonoVariable,
+                    #[cfg(feature = "variable")]
+                    Font::IntelOneMonoItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::JetBrainsMonoThin,
                     #[cfg(feature = "static")]
                     Font::JetBrainsMonoExtraLight,
@@ -7429,6 +8733,40 @@ impl Category {
                     Font::LektonItalic,
                     #[cfg(feature = "static")]
                     Font::LektonBold,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::LilexThin,
+                    #[cfg(feature = "static")]
+                    Font::LilexExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::LilexLight,
+                    #[cfg(feature = "static")]
+                    Font::LilexRegular,
+                    #[cfg(feature = "static")]
+                    Font::LilexMedium,
+                    #[cfg(feature = "static")]
+                    Font::LilexSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::LilexBold,
+                    #[cfg(feature = "static")]
+                    Font::LilexThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::LilexBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::LilexVariable,
+                    #[cfg(feature = "variable")]
+                    Font::LilexItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MPLUS1CodeThin,
                     #[cfg(feature = "static")]
@@ -7609,10 +8947,10 @@ impl Category {
                     Font::RobotoMonoItalicVariable,
                     #[cfg(feature = "static")]
                     Font::ShareTechMonoRegular,
-                    #[cfg(feature = "static")]
-                    Font::SixtyfourRegular,
                     #[cfg(feature = "variable")]
                     Font::SixtyfourRegularVariable,
+                    #[cfg(feature = "variable")]
+                    Font::SixtyfourConvergenceRegularVariable,
                     #[cfg(feature = "static")]
                     Font::SometypeMonoRegular,
                     #[cfg(feature = "static")]
@@ -7765,8 +9103,6 @@ impl Category {
                     Font::VictorMonoVariable,
                     #[cfg(feature = "variable")]
                     Font::VictorMonoItalicVariable,
-                    #[cfg(feature = "static")]
-                    Font::WorkbenchRegular,
                     #[cfg(feature = "variable")]
                     Font::WorkbenchRegularVariable,
                     #[cfg(feature = "static")]
@@ -8004,6 +9340,26 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::AfacadItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::AfacadFluxThin,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxLight,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxRegular,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxMedium,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxBold,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AfacadFluxBlack,
+                    #[cfg(feature = "variable")]
+                    Font::AfacadFluxVariable,
+                    #[cfg(feature = "static")]
                     Font::AgdasimaRegular,
                     #[cfg(feature = "static")]
                     Font::AgdasimaBold,
@@ -8031,6 +9387,22 @@ impl Category {
                     Font::AksharBold,
                     #[cfg(feature = "variable")]
                     Font::AksharVariable,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansLight,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansBold,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AlanSansBlack,
+                    #[cfg(feature = "variable")]
+                    Font::AlanSansVariable,
                     #[cfg(feature = "static")]
                     Font::AlataRegular,
                     #[cfg(feature = "static")]
@@ -8218,6 +9590,46 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AlumniSansPinstripeItalic,
                     #[cfg(feature = "static")]
+                    Font::AlumniSansSCThin,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCLight,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCRegular,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCMedium,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCBold,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCBlack,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AlumniSansSCBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AlumniSansSCVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AlumniSansSCItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::AmaranthRegular,
                     #[cfg(feature = "static")]
                     Font::AmaranthItalic,
@@ -8225,6 +9637,38 @@ impl Category {
                     Font::AmaranthBold,
                     #[cfg(feature = "static")]
                     Font::AmaranthBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaThin,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaLight,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaRegular,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaMedium,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaBold,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AmarnaBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AmarnaVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AmarnaItalicVariable,
                     #[cfg(feature = "static")]
                     Font::AmikoRegular,
                     #[cfg(feature = "static")]
@@ -8243,6 +9687,46 @@ impl Category {
                     Font::AnaheimExtraBold,
                     #[cfg(feature = "variable")]
                     Font::AnaheimVariable,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansThin,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansLight,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSansBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AncizarSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AncizarSansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::AndikaRegular,
                     #[cfg(feature = "static")]
@@ -9612,6 +11096,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AsapCondensedBlackItalic2,
                     #[cfg(feature = "static")]
+                    Font::AsimovianRegular,
+                    #[cfg(feature = "static")]
                     Font::AssistantExtraLight,
                     #[cfg(feature = "static")]
                     Font::AssistantLight,
@@ -9628,9 +11114,19 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::AssistantVariable,
                     #[cfg(feature = "static")]
-                    Font::AsulRegular,
+                    Font::AstaSansLight,
                     #[cfg(feature = "static")]
-                    Font::AsulBold,
+                    Font::AstaSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::AstaSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::AstaSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AstaSansBold,
+                    #[cfg(feature = "static")]
+                    Font::AstaSansExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::AstaSansVariable,
                     #[cfg(feature = "static")]
                     Font::AthitiExtraLight,
                     #[cfg(feature = "static")]
@@ -9652,6 +11148,70 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AtkinsonHyperlegibleBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoLight,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoMedium,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleMonoExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AtkinsonHyperlegibleMonoVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AtkinsonHyperlegibleMonoItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextLight,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextRegular,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextMedium,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AtkinsonHyperlegibleNextExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AtkinsonHyperlegibleNextVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AtkinsonHyperlegibleNextItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::AverageSansRegular,
                     #[cfg(feature = "static")]
                     Font::B612Regular,
@@ -9661,6 +11221,12 @@ impl Category {
                     Font::B612Bold,
                     #[cfg(feature = "static")]
                     Font::B612BoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::BBHBartleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BBHBogleRegular,
+                    #[cfg(feature = "static")]
+                    Font::BBHHegartyRegular,
                     #[cfg(feature = "static")]
                     Font::BIZUDGothicRegular,
                     #[cfg(feature = "static")]
@@ -10124,6 +11690,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::BubblerOneRegular,
                     #[cfg(feature = "static")]
+                    Font::BytesizedRegular,
+                    #[cfg(feature = "static")]
                     Font::CabinCondensedRegular,
                     #[cfg(feature = "static")]
                     Font::CabinCondensedMedium,
@@ -10222,6 +11790,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::CairoPlayVariable,
                     #[cfg(feature = "static")]
+                    Font::CalSansRegular,
+                    #[cfg(feature = "static")]
                     Font::CambayRegular,
                     #[cfg(feature = "static")]
                     Font::CambayItalic,
@@ -10257,6 +11827,62 @@ impl Category {
                     Font::CarroisGothicRegular,
                     #[cfg(feature = "static")]
                     Font::CarroisGothicSCRegular,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeLight,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeRegular,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeMedium,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeBold,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaCodeBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::CascadiaCodeVariable,
+                    #[cfg(feature = "variable")]
+                    Font::CascadiaCodeItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoLight,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoMedium,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoBold,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::CascadiaMonoBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::CascadiaMonoVariable,
+                    #[cfg(feature = "variable")]
+                    Font::CascadiaMonoItalicVariable,
                     #[cfg(feature = "static")]
                     Font::CatamaranThin,
                     #[cfg(feature = "static")]
@@ -10327,6 +11953,60 @@ impl Category {
                     Font::ChauPhilomeneOneRegular,
                     #[cfg(feature = "static")]
                     Font::ChauPhilomeneOneItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCRegular,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCMedium,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironGoRoundTCBlack,
+                    #[cfg(feature = "variable")]
+                    Font::ChironGoRoundTCVariable,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKRegular,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKMedium,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKBlack,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironHeiHKBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::ChironHeiHKVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ChironHeiHKItalicVariable,
                     #[cfg(feature = "static")]
                     Font::ChivoThin,
                     #[cfg(feature = "static")]
@@ -10411,6 +12091,14 @@ impl Category {
                     Font::CommissionerVariable,
                     #[cfg(feature = "static")]
                     Font::ConvergenceRegular,
+                    #[cfg(feature = "static")]
+                    Font::CossetteTexteRegular,
+                    #[cfg(feature = "static")]
+                    Font::CossetteTexteBold,
+                    #[cfg(feature = "static")]
+                    Font::CossetteTitreRegular,
+                    #[cfg(feature = "static")]
+                    Font::CossetteTitreBold,
                     #[cfg(feature = "static")]
                     Font::CuprumRegular,
                     #[cfg(feature = "static")]
@@ -10634,6 +12322,44 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::DotGothic16Regular,
                     #[cfg(feature = "static")]
+                    Font::DotoThin,
+                    #[cfg(feature = "static")]
+                    Font::DotoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::DotoLight,
+                    #[cfg(feature = "static")]
+                    Font::DotoRegular,
+                    #[cfg(feature = "static")]
+                    Font::DotoMedium,
+                    #[cfg(feature = "static")]
+                    Font::DotoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoBlack,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedThin,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedLight,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedRegular,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedMedium,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::DotoRoundedBlack,
+                    #[cfg(feature = "variable")]
+                    Font::DotoVariable,
+                    #[cfg(feature = "static")]
                     Font::DuruSansRegular,
                     #[cfg(feature = "static")]
                     Font::EconomicaRegular,
@@ -10655,6 +12381,46 @@ impl Category {
                     Font::ElMessiriVariable,
                     #[cfg(feature = "static")]
                     Font::ElectrolizeRegular,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansThin,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansLight,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansBold,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ElmsSansBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::ElmsSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ElmsSansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::EncodeSansCondensedThin,
                     #[cfg(feature = "static")]
@@ -10954,6 +12720,38 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::EpilogueItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::EpundaSansLight,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSansBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::EpundaSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::EpundaSansItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::ExoThin,
                     #[cfg(feature = "static")]
                     Font::ExoExtraLight,
@@ -11033,6 +12831,8 @@ impl Category {
                     Font::Exo2Variable,
                     #[cfg(feature = "variable")]
                     Font::Exo2ItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::FacultyGlyphicRegular,
                     #[cfg(feature = "static")]
                     Font::FahkwangExtraLight,
                     #[cfg(feature = "static")]
@@ -11306,6 +13106,34 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::FrescaRegular,
                     #[cfg(feature = "static")]
+                    Font::FunnelSansLight,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansBold,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::FunnelSansExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::FunnelSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::FunnelSansItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::FustatExtraLight,
                     #[cfg(feature = "static")]
                     Font::FustatLight,
@@ -11381,6 +13209,26 @@ impl Category {
                     Font::GayathriRegular,
                     #[cfg(feature = "static")]
                     Font::GayathriBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistThin,
+                    #[cfg(feature = "static")]
+                    Font::GeistExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GeistLight,
+                    #[cfg(feature = "static")]
+                    Font::GeistRegular,
+                    #[cfg(feature = "static")]
+                    Font::GeistMedium,
+                    #[cfg(feature = "static")]
+                    Font::GeistSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GeistBlack,
+                    #[cfg(feature = "variable")]
+                    Font::GeistVariable,
                     #[cfg(feature = "static")]
                     Font::GemunuLibreExtraLight,
                     #[cfg(feature = "static")]
@@ -11497,6 +13345,38 @@ impl Category {
                     Font::GeologicaCursiveBlack,
                     #[cfg(feature = "variable")]
                     Font::GeologicaVariable,
+                    #[cfg(feature = "static")]
+                    Font::GeomLight,
+                    #[cfg(feature = "static")]
+                    Font::GeomRegular,
+                    #[cfg(feature = "static")]
+                    Font::GeomMedium,
+                    #[cfg(feature = "static")]
+                    Font::GeomSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GeomBold,
+                    #[cfg(feature = "static")]
+                    Font::GeomExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GeomBlack,
+                    #[cfg(feature = "static")]
+                    Font::GeomLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GeomBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::GeomVariable,
+                    #[cfg(feature = "variable")]
+                    Font::GeomItalicVariable,
                     #[cfg(feature = "static")]
                     Font::GeoramaExtraCondensedThin,
                     #[cfg(feature = "static")]
@@ -11754,6 +13634,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::GeoramaItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::GidoleRegular,
+                    #[cfg(feature = "static")]
                     Font::GiduguRegular,
                     #[cfg(feature = "static")]
                     Font::GloryThin,
@@ -11806,6 +13688,134 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::GolosTextVariable,
                     #[cfg(feature = "static")]
+                    Font::GoogleSans17ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSans17ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::GoogleSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::GoogleSansItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptThin,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex9ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptThin,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptThin,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex36ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptThin,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex72ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptThin,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptLight,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::GoogleSansFlex120ptBlack,
+                    #[cfg(feature = "variable")]
+                    Font::GoogleSansFlexVariable,
+                    #[cfg(feature = "static")]
                     Font::GothicA1Thin,
                     #[cfg(feature = "static")]
                     Font::GothicA1ExtraLight,
@@ -11835,6 +13845,8 @@ impl Category {
                     Font::GudeaItalic,
                     #[cfg(feature = "static")]
                     Font::GudeaBold,
+                    #[cfg(feature = "static")]
+                    Font::GurajadaRegular,
                     #[cfg(feature = "static")]
                     Font::HammersmithOneRegular,
                     #[cfg(feature = "static")]
@@ -11938,6 +13950,16 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::HindMaduraiBold,
                     #[cfg(feature = "static")]
+                    Font::HindMysuruLight,
+                    #[cfg(feature = "static")]
+                    Font::HindMysuruRegular,
+                    #[cfg(feature = "static")]
+                    Font::HindMysuruMedium,
+                    #[cfg(feature = "static")]
+                    Font::HindMysuruSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HindMysuruBold,
+                    #[cfg(feature = "static")]
                     Font::HindSiliguriLight,
                     #[cfg(feature = "static")]
                     Font::HindSiliguriRegular,
@@ -11960,35 +13982,289 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::HomenajeRegular,
                     #[cfg(feature = "static")]
+                    Font::HostGroteskLight,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskRegular,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskMedium,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskBold,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskItalic,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HostGroteskExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::HostGroteskVariable,
+                    #[cfg(feature = "variable")]
+                    Font::HostGroteskItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::HubballiRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansSemiExpandedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::HubotSansExpandedBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::HubotSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::HubotSansItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::HuninnRegular,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedBold,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansThin,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansThinItalic,
-                    #[cfg(feature = "static")]
                     Font::IBMPlexSansExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::IBMPlexSansExtraLightItalic,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansLight,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansLightItalic,
-                    #[cfg(feature = "static")]
                     Font::IBMPlexSansRegular,
-                    #[cfg(feature = "static")]
-                    Font::IBMPlexSansItalic,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansMedium,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansMediumItalic,
-                    #[cfg(feature = "static")]
                     Font::IBMPlexSansSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::IBMPlexSansSemiBoldItalic,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansBold,
                     #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::IBMPlexSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
                     Font::IBMPlexSansBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::IBMPlexSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::IBMPlexSansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansArabicThin,
                     #[cfg(feature = "static")]
@@ -12004,33 +14280,33 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansArabicBold,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedThin,
+                    Font::IBMPlexSansCondensedThin2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedThinItalic,
+                    Font::IBMPlexSansCondensedThinItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedExtraLight,
+                    Font::IBMPlexSansCondensedExtraLight2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedExtraLightItalic,
+                    Font::IBMPlexSansCondensedExtraLightItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedLight,
+                    Font::IBMPlexSansCondensedLight2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedLightItalic,
+                    Font::IBMPlexSansCondensedLightItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedRegular,
+                    Font::IBMPlexSansCondensedRegular2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedItalic,
+                    Font::IBMPlexSansCondensedItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedMedium,
+                    Font::IBMPlexSansCondensedMedium2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedMediumItalic,
+                    Font::IBMPlexSansCondensedMediumItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedSemiBold,
+                    Font::IBMPlexSansCondensedSemiBold2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedSemiBoldItalic,
+                    Font::IBMPlexSansCondensedSemiBoldItalic2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedBold,
+                    Font::IBMPlexSansCondensedBold2,
                     #[cfg(feature = "static")]
-                    Font::IBMPlexSansCondensedBoldItalic,
+                    Font::IBMPlexSansCondensedBoldItalic2,
                     #[cfg(feature = "static")]
                     Font::IBMPlexSansDevanagariThin,
                     #[cfg(feature = "static")]
@@ -12118,9 +14394,29 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::ImprimaRegular,
                     #[cfg(feature = "static")]
+                    Font::InclusiveSansLight,
+                    #[cfg(feature = "static")]
                     Font::InclusiveSansRegular,
                     #[cfg(feature = "static")]
+                    Font::InclusiveSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansBold,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansLightItalic,
+                    #[cfg(feature = "static")]
                     Font::InclusiveSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::InclusiveSansBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::InclusiveSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::InclusiveSansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::InderRegular,
                     #[cfg(feature = "static")]
@@ -12188,25 +14484,117 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::InstrumentSansItalicVariable,
                     #[cfg(feature = "static")]
-                    Font::InterThin,
+                    Font::Inter18ptThin,
                     #[cfg(feature = "static")]
-                    Font::InterExtraLight,
+                    Font::Inter18ptExtraLight,
                     #[cfg(feature = "static")]
-                    Font::InterLight,
+                    Font::Inter18ptLight,
                     #[cfg(feature = "static")]
-                    Font::InterRegular,
+                    Font::Inter18ptRegular,
                     #[cfg(feature = "static")]
-                    Font::InterMedium,
+                    Font::Inter18ptMedium,
                     #[cfg(feature = "static")]
-                    Font::InterSemiBold,
+                    Font::Inter18ptSemiBold,
                     #[cfg(feature = "static")]
-                    Font::InterBold,
+                    Font::Inter18ptBold,
                     #[cfg(feature = "static")]
-                    Font::InterExtraBold,
+                    Font::Inter18ptExtraBold,
                     #[cfg(feature = "static")]
-                    Font::InterBlack,
+                    Font::Inter18ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptThin,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptThin,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter18ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter24ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Inter28ptBlackItalic,
                     #[cfg(feature = "variable")]
                     Font::InterVariable,
+                    #[cfg(feature = "variable")]
+                    Font::InterItalicVariable,
                     #[cfg(feature = "static")]
                     Font::InterTightThin,
                     #[cfg(feature = "static")]
@@ -12255,6 +14643,8 @@ impl Category {
                     Font::IstokWebBold,
                     #[cfg(feature = "static")]
                     Font::IstokWebBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ItalianaRegular,
                     #[cfg(feature = "static")]
                     Font::JaldiRegular,
                     #[cfg(feature = "static")]
@@ -12394,6 +14784,14 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::K2DExtraBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::KanchenjungaRegular,
+                    #[cfg(feature = "static")]
+                    Font::KanchenjungaMedium,
+                    #[cfg(feature = "static")]
+                    Font::KanchenjungaSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::KanchenjungaBold,
+                    #[cfg(feature = "static")]
                     Font::KanitThin,
                     #[cfg(feature = "static")]
                     Font::KanitThinItalic,
@@ -12494,7 +14892,27 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::KarlaItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::KarlaTamilInclinedRegular,
+                    #[cfg(feature = "static")]
+                    Font::KarlaTamilInclinedBold,
+                    #[cfg(feature = "static")]
+                    Font::KarlaTamilUprightRegular,
+                    #[cfg(feature = "static")]
+                    Font::KarlaTamilUprightBold,
+                    #[cfg(feature = "static")]
                     Font::KdamThmorProRegular,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriRegular,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriMedium,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriBold,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::KedebideriBlack,
                     #[cfg(feature = "static")]
                     Font::KhandLight,
                     #[cfg(feature = "static")]
@@ -12645,36 +15063,12 @@ impl Category {
                     Font::KulimParkBold,
                     #[cfg(feature = "static")]
                     Font::KulimParkBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansThin,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansLight,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansRegular,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansMedium,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansBold,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::KumbhSansBlack,
                     #[cfg(feature = "variable")]
                     Font::KumbhSansVariable,
                     #[cfg(feature = "static")]
-                    Font::LailaLight,
+                    Font::LXGWMarkerGothicRegular,
                     #[cfg(feature = "static")]
-                    Font::LailaRegular,
-                    #[cfg(feature = "static")]
-                    Font::LailaMedium,
-                    #[cfg(feature = "static")]
-                    Font::LailaSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::LailaBold,
+                    Font::LalezarRegular,
                     #[cfg(feature = "static")]
                     Font::LatoThin,
                     #[cfg(feature = "static")]
@@ -12884,6 +15278,12 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::LexendZettaVariable,
                     #[cfg(feature = "static")]
+                    Font::LibertinusSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSansBold,
+                    #[cfg(feature = "static")]
                     Font::LibreFranklinThin,
                     #[cfg(feature = "static")]
                     Font::LibreFranklinExtraLight,
@@ -12923,6 +15323,8 @@ impl Category {
                     Font::LibreFranklinVariable,
                     #[cfg(feature = "variable")]
                     Font::LibreFranklinItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::LiterRegular,
                     #[cfg(feature = "static")]
                     Font::LivvicThin,
                     #[cfg(feature = "static")]
@@ -13148,6 +15550,24 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::MarvelBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::MatangiLight,
+                    #[cfg(feature = "static")]
+                    Font::MatangiRegular,
+                    #[cfg(feature = "static")]
+                    Font::MatangiMedium,
+                    #[cfg(feature = "static")]
+                    Font::MatangiSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MatangiBold,
+                    #[cfg(feature = "static")]
+                    Font::MatangiExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MatangiBlack,
+                    #[cfg(feature = "variable")]
+                    Font::MatangiVariable,
+                    #[cfg(feature = "static")]
+                    Font::MatemasieRegular,
+                    #[cfg(feature = "static")]
                     Font::MavenProRegular,
                     #[cfg(feature = "static")]
                     Font::MavenProMedium,
@@ -13163,6 +15583,22 @@ impl Category {
                     Font::MavenProVariable,
                     #[cfg(feature = "static")]
                     Font::MeeraInimaiRegular,
+                    #[cfg(feature = "static")]
+                    Font::MenbereThin,
+                    #[cfg(feature = "static")]
+                    Font::MenbereExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MenbereLight,
+                    #[cfg(feature = "static")]
+                    Font::MenbereRegular,
+                    #[cfg(feature = "static")]
+                    Font::MenbereMedium,
+                    #[cfg(feature = "static")]
+                    Font::MenbereSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MenbereBold,
+                    #[cfg(feature = "variable")]
+                    Font::MenbereVariable,
                     #[cfg(feature = "static")]
                     Font::MerriweatherSansLight,
                     #[cfg(feature = "static")]
@@ -13204,7 +15640,13 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::MiriamLibreRegular,
                     #[cfg(feature = "static")]
+                    Font::MiriamLibreMedium,
+                    #[cfg(feature = "static")]
+                    Font::MiriamLibreSemiBold,
+                    #[cfg(feature = "static")]
                     Font::MiriamLibreBold,
+                    #[cfg(feature = "variable")]
+                    Font::MiriamLibreVariable,
                     #[cfg(feature = "static")]
                     Font::MitrExtraLight,
                     #[cfg(feature = "static")]
@@ -13221,6 +15663,20 @@ impl Category {
                     Font::MochiyPopOneRegular,
                     #[cfg(feature = "static")]
                     Font::MochiyPopPOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticLight,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticRegular,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticMedium,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticBold,
+                    #[cfg(feature = "static")]
+                    Font::ModerusticExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::ModerusticVariable,
                     #[cfg(feature = "static")]
                     Font::MohaveLight,
                     #[cfg(feature = "static")]
@@ -13247,6 +15703,190 @@ impl Category {
                     Font::MohaveItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MolengoRegular,
+                    #[cfg(feature = "static")]
+                    Font::MomoSignatureRegular,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustDisplayRegular,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansLight,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansBold,
+                    #[cfg(feature = "static")]
+                    Font::MomoTrustSansExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::MomoTrustSansVariable,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansSemiExpandedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MonaSansExpandedBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::MonaSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::MonaSansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MondaRegular,
                     #[cfg(feature = "static")]
@@ -13336,15 +15976,127 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::MontserratAlternatesBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::MontserratSubrayadaRegular,
+                    Font::MontserratUnderlineThin,
                     #[cfg(feature = "static")]
-                    Font::MontserratSubrayadaBold,
+                    Font::MontserratUnderlineExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineLight,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineRegular,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineMedium,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineBold,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineBlack,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::MontserratUnderlineBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::MontserratUnderlineVariable,
+                    #[cfg(feature = "variable")]
+                    Font::MontserratUnderlineItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MooliRegular,
                     #[cfg(feature = "static")]
                     Font::MoulpaliRegular,
                     #[cfg(feature = "static")]
                     Font::MouseMemoirsRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaHeadlineExpandedBold,
+                    #[cfg(feature = "variable")]
+                    Font::MozillaHeadlineVariable,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextLight,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextRegular,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextMedium,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::MozillaTextBold,
+                    #[cfg(feature = "variable")]
+                    Font::MozillaTextVariable,
                     #[cfg(feature = "static")]
                     Font::MuktaExtraLight,
                     #[cfg(feature = "static")]
@@ -13466,6 +16218,54 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::NanumGothicExtraBold,
                     #[cfg(feature = "static")]
+                    Font::NarnoorRegular,
+                    #[cfg(feature = "static")]
+                    Font::NarnoorMedium,
+                    #[cfg(feature = "static")]
+                    Font::NarnoorSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NarnoorBold,
+                    #[cfg(feature = "static")]
+                    Font::NarnoorExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NataSansThin,
+                    #[cfg(feature = "static")]
+                    Font::NataSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NataSansLight,
+                    #[cfg(feature = "static")]
+                    Font::NataSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::NataSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::NataSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NataSansBold,
+                    #[cfg(feature = "static")]
+                    Font::NataSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NataSansBlack,
+                    #[cfg(feature = "variable")]
+                    Font::NataSansVariable,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkLight,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkRegular,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkMedium,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkBold,
+                    #[cfg(feature = "static")]
+                    Font::NationalParkExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::NationalParkVariable,
+                    #[cfg(feature = "static")]
+                    Font::NewAmsterdamRegular,
+                    #[cfg(feature = "static")]
                     Font::NewsCycleRegular,
                     #[cfg(feature = "static")]
                     Font::NewsCycleBold,
@@ -13508,13 +16308,23 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::NokoraThin,
                     #[cfg(feature = "static")]
+                    Font::NokoraExtraLight,
+                    #[cfg(feature = "static")]
                     Font::NokoraLight,
                     #[cfg(feature = "static")]
                     Font::NokoraRegular,
                     #[cfg(feature = "static")]
+                    Font::NokoraMedium,
+                    #[cfg(feature = "static")]
+                    Font::NokoraSemiBold,
+                    #[cfg(feature = "static")]
                     Font::NokoraBold,
                     #[cfg(feature = "static")]
+                    Font::NokoraExtraBold,
+                    #[cfg(feature = "static")]
                     Font::NokoraBlack,
+                    #[cfg(feature = "variable")]
+                    Font::NokoraVariable,
                     #[cfg(feature = "static")]
                     Font::NotableRegular,
                     #[cfg(feature = "static")]
@@ -15638,6 +18448,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::NotoSansSundaneseVariable,
                     #[cfg(feature = "static")]
+                    Font::NotoSansSunuwarRegular,
+                    #[cfg(feature = "static")]
                     Font::NotoSansSylotiNagriRegular,
                     #[cfg(feature = "static")]
                     Font::NotoSansSymbolsThin,
@@ -15701,6 +18513,26 @@ impl Category {
                     Font::NotoSansSyriacEasternBlack,
                     #[cfg(feature = "variable")]
                     Font::NotoSansSyriacEasternVariable,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternThin,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternRegular,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternMedium,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansSyriacWesternBlack,
+                    #[cfg(feature = "variable")]
+                    Font::NotoSansSyriacWesternVariable,
                     #[cfg(feature = "static")]
                     Font::NotoSansTCThin,
                     #[cfg(feature = "static")]
@@ -15996,6 +18828,60 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::NotoSansThaiVariable,
                     #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedExtraCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSansThaiLoopedSemiCondensedBlack,
+                    #[cfg(feature = "static")]
                     Font::NotoSansThaiLoopedThin,
                     #[cfg(feature = "static")]
                     Font::NotoSansThaiLoopedExtraLight,
@@ -16013,6 +18899,8 @@ impl Category {
                     Font::NotoSansThaiLoopedExtraBold,
                     #[cfg(feature = "static")]
                     Font::NotoSansThaiLoopedBlack,
+                    #[cfg(feature = "variable")]
+                    Font::NotoSansThaiLoopedVariable,
                     #[cfg(feature = "static")]
                     Font::NotoSansTifinaghRegular,
                     #[cfg(feature = "static")]
@@ -16091,326 +18979,6 @@ impl Category {
                     Font::NunitoVariable,
                     #[cfg(feature = "variable")]
                     Font::NunitoItalicVariable,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans7ptExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::NunitoSans10ptExpandedBlackItalic,
                     #[cfg(feature = "variable")]
                     Font::NunitoSansVariable,
                     #[cfg(feature = "variable")]
@@ -16670,41 +19238,19 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PalanquinDarkBold,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedThin,
+                    Font::ParkinsansLight,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedExtraLight,
+                    Font::ParkinsansRegular,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedLight,
+                    Font::ParkinsansMedium,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedRegular,
+                    Font::ParkinsansSemiBold,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedMedium,
+                    Font::ParkinsansBold,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedBlack,
+                    Font::ParkinsansExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::ParkinsansVariable,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme14ptThin,
                     #[cfg(feature = "static")]
@@ -16724,42 +19270,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme14ptBlack,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::PathwayExtreme28ptThin,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme28ptExtraLight,
@@ -16777,42 +19287,6 @@ impl Category {
                     Font::PathwayExtreme28ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme28ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme36ptThin,
                     #[cfg(feature = "static")]
@@ -16832,42 +19306,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme36ptBlack,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptThin,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptExtraLight,
@@ -16885,42 +19323,6 @@ impl Category {
                     Font::PathwayExtreme72ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme120ptThin,
                     #[cfg(feature = "static")]
@@ -16940,42 +19342,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme120ptBlack,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme14ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::PathwayExtreme14ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme14ptExtraLightItalic,
@@ -16993,42 +19359,6 @@ impl Category {
                     Font::PathwayExtreme14ptExtraBoldItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme14ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme28ptSemiCondensedBlackItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme28ptThinItalic,
                     #[cfg(feature = "static")]
@@ -17048,42 +19378,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme28ptBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme36ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::PathwayExtreme36ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme36ptExtraLightItalic,
@@ -17102,42 +19396,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme36ptBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme72ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptExtraLightItalic,
@@ -17155,42 +19413,6 @@ impl Category {
                     Font::PathwayExtreme72ptExtraBoldItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme72ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::PathwayExtreme120ptSemiCondensedBlackItalic,
                     #[cfg(feature = "static")]
                     Font::PathwayExtreme120ptThinItalic,
                     #[cfg(feature = "static")]
@@ -17221,6 +19443,10 @@ impl Category {
                     Font::PavanamRegular,
                     #[cfg(feature = "static")]
                     Font::PaytoneOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::PhetsarathRegular,
+                    #[cfg(feature = "static")]
+                    Font::PhetsarathBold,
                     #[cfg(feature = "static")]
                     Font::PhilosopherRegular,
                     #[cfg(feature = "static")]
@@ -17872,30 +20098,6 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::RethinkSansItalicVariable,
                     #[cfg(feature = "static")]
-                    Font::RobotoThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::RobotoCondensedThin,
                     #[cfg(feature = "static")]
                     Font::RobotoCondensedExtraLight,
@@ -17914,6 +20116,42 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoCondensedBlack,
                     #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::RobotoThin,
+                    #[cfg(feature = "static")]
+                    Font::RobotoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::RobotoLight,
+                    #[cfg(feature = "static")]
+                    Font::RobotoRegular,
+                    #[cfg(feature = "static")]
+                    Font::RobotoMedium,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::RobotoBlack,
+                    #[cfg(feature = "static")]
                     Font::RobotoCondensedThinItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoCondensedExtraLightItalic,
@@ -17931,12 +20169,86 @@ impl Category {
                     Font::RobotoCondensedExtraBoldItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::RobotoBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::RobotoVariable,
+                    #[cfg(feature = "variable")]
+                    Font::RobotoItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedThin2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedExtraLight2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedLight2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedRegular2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedMedium2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedSemiBold2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedBold2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedExtraBold2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedBlack2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedThinItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedExtraLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedMediumItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedSemiBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedExtraBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::RobotoCondensedBlackItalic2,
                     #[cfg(feature = "variable")]
                     Font::RobotoCondensedVariable,
                     #[cfg(feature = "variable")]
                     Font::RobotoCondensedItalicVariable,
-                    #[cfg(feature = "static")]
-                    Font::RobotoFlexRegular,
                     #[cfg(feature = "variable")]
                     Font::RobotoFlexVariable,
                     #[cfg(feature = "static")]
@@ -18023,6 +20335,82 @@ impl Category {
                     Font::RumRaisinRegular,
                     #[cfg(feature = "static")]
                     Font::RussoOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::SUSEThin,
+                    #[cfg(feature = "static")]
+                    Font::SUSEExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SUSELight,
+                    #[cfg(feature = "static")]
+                    Font::SUSERegular,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMedium,
+                    #[cfg(feature = "static")]
+                    Font::SUSESemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEBlack,
+                    #[cfg(feature = "static")]
+                    Font::SUSEThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSELightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSESemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::SUSEVariable,
+                    #[cfg(feature = "variable")]
+                    Font::SUSEItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoThin,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoLight,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoRegular,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoMedium,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SUSEMonoExtraBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::SUSEMonoVariable,
+                    #[cfg(feature = "variable")]
+                    Font::SUSEMonoItalicVariable,
                     #[cfg(feature = "static")]
                     Font::SairaUltraCondensedThin,
                     #[cfg(feature = "static")]
@@ -18334,6 +20722,20 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::SairaSemiCondensedBlack2,
                     #[cfg(feature = "static")]
+                    Font::SankofaDisplayRegular,
+                    #[cfg(feature = "static")]
+                    Font::SansationLight,
+                    #[cfg(feature = "static")]
+                    Font::SansationLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SansationRegular,
+                    #[cfg(feature = "static")]
+                    Font::SansationItalic,
+                    #[cfg(feature = "static")]
+                    Font::SansationBold,
+                    #[cfg(feature = "static")]
+                    Font::SansationBoldItalic,
+                    #[cfg(feature = "static")]
                     Font::SansitaRegular,
                     #[cfg(feature = "static")]
                     Font::SansitaItalic,
@@ -18398,6 +20800,42 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::SarpanchBlack,
                     #[cfg(feature = "static")]
+                    Font::SavateExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SavateLight,
+                    #[cfg(feature = "static")]
+                    Font::SavateRegular,
+                    #[cfg(feature = "static")]
+                    Font::SavateMedium,
+                    #[cfg(feature = "static")]
+                    Font::SavateSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SavateBold,
+                    #[cfg(feature = "static")]
+                    Font::SavateExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SavateBlack,
+                    #[cfg(feature = "static")]
+                    Font::SavateExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SavateBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::SavateVariable,
+                    #[cfg(feature = "variable")]
+                    Font::SavateItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::SawarabiGothicRegular,
                     #[cfg(feature = "static")]
                     Font::ScadaRegular,
@@ -18435,6 +20873,170 @@ impl Category {
                     Font::SchibstedGroteskVariable,
                     #[cfg(feature = "variable")]
                     Font::SchibstedGroteskItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicExtraExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ScienceGothicUltraExpandedBlack,
+                    #[cfg(feature = "variable")]
+                    Font::ScienceGothicVariable,
                     #[cfg(feature = "static")]
                     Font::SecularOneRegular,
                     #[cfg(feature = "static")]
@@ -18497,6 +21099,8 @@ impl Category {
                     Font::SintonyRegular,
                     #[cfg(feature = "static")]
                     Font::SintonyBold,
+                    #[cfg(feature = "static")]
+                    Font::SirivennelaRegular,
                     #[cfg(feature = "static")]
                     Font::SixCapsRegular,
                     #[cfg(feature = "static")]
@@ -18730,6 +21334,118 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::SoraVariable,
                     #[cfg(feature = "static")]
+                    Font::SourGummyThin,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyRegular,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyMedium,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyBlack,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedThin,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummySemiExpandedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedThinItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::SourGummyExpandedBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::SourGummyVariable,
+                    #[cfg(feature = "variable")]
+                    Font::SourGummyItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::SourceSans3ExtraLight,
                     #[cfg(feature = "static")]
                     Font::SourceSans3Light,
@@ -18778,6 +21494,52 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::SpaceGroteskVariable,
                     #[cfg(feature = "static")]
+                    Font::SpecialGothicCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicMedium,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicExpandedBold,
+                    #[cfg(feature = "variable")]
+                    Font::SpecialGothicVariable,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicCondensedOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::SpecialGothicExpandedOneRegular,
+                    #[cfg(feature = "static")]
                     Font::SpinnakerRegular,
                     #[cfg(feature = "static")]
                     Font::SplineSansLight,
@@ -18791,6 +21553,48 @@ impl Category {
                     Font::SplineSansBold,
                     #[cfg(feature = "variable")]
                     Font::SplineSansVariable,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineRegular,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineMedium,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::StackSansHeadlineBold,
+                    #[cfg(feature = "variable")]
+                    Font::StackSansHeadlineVariable,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchRegular,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchMedium,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::StackSansNotchBold,
+                    #[cfg(feature = "variable")]
+                    Font::StackSansNotchVariable,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextLight,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextRegular,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextMedium,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::StackSansTextBold,
+                    #[cfg(feature = "variable")]
+                    Font::StackSansTextVariable,
                     #[cfg(feature = "static")]
                     Font::StickRegular,
                     #[cfg(feature = "static")]
@@ -18809,6 +21613,8 @@ impl Category {
                     Font::StickNoBillsExtraBold,
                     #[cfg(feature = "variable")]
                     Font::StickNoBillsVariable,
+                    #[cfg(feature = "static")]
+                    Font::StoryScriptRegular,
                     #[cfg(feature = "static")]
                     Font::StraitRegular,
                     #[cfg(feature = "static")]
@@ -18841,6 +21647,30 @@ impl Category {
                     Font::SyneExtraBold,
                     #[cfg(feature = "variable")]
                     Font::SyneVariable,
+                    #[cfg(feature = "static")]
+                    Font::TASAExplorerRegular,
+                    #[cfg(feature = "static")]
+                    Font::TASAExplorerMedium,
+                    #[cfg(feature = "static")]
+                    Font::TASAExplorerSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TASAExplorerBold,
+                    #[cfg(feature = "static")]
+                    Font::TASAExplorerExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::TASAExplorerVariable,
+                    #[cfg(feature = "static")]
+                    Font::TASAOrbiterRegular,
+                    #[cfg(feature = "static")]
+                    Font::TASAOrbiterMedium,
+                    #[cfg(feature = "static")]
+                    Font::TASAOrbiterSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TASAOrbiterBold,
+                    #[cfg(feature = "static")]
+                    Font::TASAOrbiterExtraBold,
+                    #[cfg(feature = "variable")]
+                    Font::TASAOrbiterVariable,
                     #[cfg(feature = "static")]
                     Font::TacOneRegular,
                     #[cfg(feature = "static")]
@@ -18912,9 +21742,359 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::ThasadithBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSansExtraExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans18ptExtraExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans24ptExtraExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TikTokSans28ptExtraExpandedBlack,
+                    #[cfg(feature = "variable")]
+                    Font::TikTokSansVariable,
+                    #[cfg(feature = "static")]
                     Font::TimmanaRegular,
                     #[cfg(feature = "static")]
                     Font::Tiny5Regular,
+                    #[cfg(feature = "static")]
+                    Font::TirraRegular,
+                    #[cfg(feature = "static")]
+                    Font::TirraMedium,
+                    #[cfg(feature = "static")]
+                    Font::TirraSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::TirraBold,
+                    #[cfg(feature = "static")]
+                    Font::TirraExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::TirraBlack,
                     #[cfg(feature = "static")]
                     Font::TitilliumWebExtraLight,
                     #[cfg(feature = "static")]
@@ -19056,42 +22236,6 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::TrispaceVariable,
                     #[cfg(feature = "static")]
-                    Font::TruculentaCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::TruculentaThin,
                     #[cfg(feature = "static")]
                     Font::TruculentaExtraLight,
@@ -19109,78 +22253,6 @@ impl Category {
                     Font::TruculentaExtraBold,
                     #[cfg(feature = "static")]
                     Font::TruculentaBlack,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::TruculentaExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::Truculenta18ptThin,
                     #[cfg(feature = "static")]
@@ -19200,78 +22272,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::Truculenta18ptBlack,
                     #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta18ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::Truculenta28ptThin,
                     #[cfg(feature = "static")]
                     Font::Truculenta28ptExtraLight,
@@ -19289,78 +22289,6 @@ impl Category {
                     Font::Truculenta28ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::Truculenta28ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta28ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::Truculenta48ptThin,
                     #[cfg(feature = "static")]
@@ -19380,78 +22308,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::Truculenta48ptBlack,
                     #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta48ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::Truculenta60ptThin,
                     #[cfg(feature = "static")]
                     Font::Truculenta60ptExtraLight,
@@ -19469,42 +22325,6 @@ impl Category {
                     Font::Truculenta60ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::Truculenta60ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::Truculenta60ptExpandedBlack,
                     #[cfg(feature = "variable")]
                     Font::TruculentaVariable,
                     #[cfg(feature = "static")]
@@ -19517,6 +22337,14 @@ impl Category {
                     Font::TsukimiRoundedSemiBold,
                     #[cfg(feature = "static")]
                     Font::TsukimiRoundedBold,
+                    #[cfg(feature = "static")]
+                    Font::TuffyRegular,
+                    #[cfg(feature = "static")]
+                    Font::TuffyItalic,
+                    #[cfg(feature = "static")]
+                    Font::TuffyBold,
+                    #[cfg(feature = "static")]
+                    Font::TuffyBoldItalic,
                     #[cfg(feature = "static")]
                     Font::UbuntuLight,
                     #[cfg(feature = "static")]
@@ -19730,13 +22558,107 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::VazirmatnVariable,
                     #[cfg(feature = "static")]
+                    Font::VendSansLight,
+                    #[cfg(feature = "static")]
+                    Font::VendSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::VendSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::VendSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::VendSansBold,
+                    #[cfg(feature = "static")]
+                    Font::VendSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::VendSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::VendSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::VendSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::VendSansBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::VendSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::VendSansItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::VigaRegular,
                     #[cfg(feature = "static")]
                     Font::VocesRegular,
                     #[cfg(feature = "static")]
                     Font::VoltaireRegular,
                     #[cfg(feature = "static")]
+                    Font::WDXLLubrifontJPNRegular,
+                    #[cfg(feature = "static")]
+                    Font::WDXLLubrifontSCRegular,
+                    #[cfg(feature = "static")]
+                    Font::WDXLLubrifontTCRegular,
+                    #[cfg(feature = "static")]
                     Font::WendyOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughLight,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughRegular,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughMedium,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughBlack,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkyRoughBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::WinkyRoughVariable,
+                    #[cfg(feature = "variable")]
+                    Font::WinkyRoughItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansLight,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansRegular,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansMedium,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansBlack,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::WinkySansBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::WinkySansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::WinkySansItalicVariable,
                     #[cfg(feature = "static")]
                     Font::WireOneRegular,
                     #[cfg(feature = "static")]
@@ -20008,13 +22930,253 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::ZainLight,
                     #[cfg(feature = "static")]
+                    Font::ZainLightItalic,
+                    #[cfg(feature = "static")]
                     Font::ZainRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZainItalic,
                     #[cfg(feature = "static")]
                     Font::ZainBold,
                     #[cfg(feature = "static")]
                     Font::ZainExtraBold,
                     #[cfg(feature = "static")]
                     Font::ZainBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansMedium,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedLight,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedRegular,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedMedium,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBlack,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraLight2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedLight2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedRegular2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedMedium2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedSemiBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBlack2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedMediumItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedSemiBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedExtraBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansExpandedBlackItalic2,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansExpandedVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansExpandedItalicVariable,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraLight2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedLight2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedRegular2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedMedium2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedSemiBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraBold2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBlack2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedLightItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedMediumItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedSemiBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedExtraBoldItalic2,
+                    #[cfg(feature = "static")]
+                    Font::ZalandoSansSemiExpandedBlackItalic2,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansSemiExpandedVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ZalandoSansSemiExpandedItalicVariable,
                     #[cfg(feature = "static")]
                     Font::ZenKakuGothicAntiqueLight,
                     #[cfg(feature = "static")]
@@ -20184,6 +23346,38 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AmiriQuranRegular,
                     #[cfg(feature = "static")]
+                    Font::AncizarSerifLight,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifRegular,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifMedium,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifBlack,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::AncizarSerifBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::AncizarSerifVariable,
+                    #[cfg(feature = "variable")]
+                    Font::AncizarSerifItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::AndadaProRegular,
                     #[cfg(feature = "static")]
                     Font::AndadaProMedium,
@@ -20246,6 +23440,10 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::AsarRegular,
                     #[cfg(feature = "static")]
+                    Font::AsulRegular,
+                    #[cfg(feature = "static")]
+                    Font::AsulBold,
+                    #[cfg(feature = "static")]
                     Font::AverageRegular,
                     #[cfg(feature = "static")]
                     Font::BIZUDMinchoRegular,
@@ -20262,9 +23460,33 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::BaskervvilleRegular,
                     #[cfg(feature = "static")]
+                    Font::BaskervvilleMedium,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleBold,
+                    #[cfg(feature = "static")]
                     Font::BaskervvilleItalic,
                     #[cfg(feature = "static")]
+                    Font::BaskervvilleMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::BaskervvilleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::BaskervvilleItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::BaskervvilleSCRegular,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleSCMedium,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleSCSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::BaskervvilleSCBold,
+                    #[cfg(feature = "variable")]
+                    Font::BaskervvilleSCVariable,
                     #[cfg(feature = "static")]
                     Font::BelgranoRegular,
                     #[cfg(feature = "static")]
@@ -20690,7 +23912,13 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::BuenardRegular,
                     #[cfg(feature = "static")]
+                    Font::BuenardMedium,
+                    #[cfg(feature = "static")]
+                    Font::BuenardSemiBold,
+                    #[cfg(feature = "static")]
                     Font::BuenardBold,
+                    #[cfg(feature = "variable")]
+                    Font::BuenardVariable,
                     #[cfg(feature = "static")]
                     Font::CactusClassicalSerifRegular,
                     #[cfg(feature = "static")]
@@ -20731,6 +23959,42 @@ impl Category {
                     Font::CharisSILBold,
                     #[cfg(feature = "static")]
                     Font::CharisSILBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKLight,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKRegular,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKMedium,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKBlack,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKExtraLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::ChironSungHKBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::ChironSungHKVariable,
+                    #[cfg(feature = "variable")]
+                    Font::ChironSungHKItalicVariable,
                     #[cfg(feature = "static")]
                     Font::CinzelRegular,
                     #[cfg(feature = "static")]
@@ -20774,43 +24038,51 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::CormorantGaramondLight,
                     #[cfg(feature = "static")]
-                    Font::CormorantGaramondLightItalic,
-                    #[cfg(feature = "static")]
                     Font::CormorantGaramondRegular,
-                    #[cfg(feature = "static")]
-                    Font::CormorantGaramondItalic,
                     #[cfg(feature = "static")]
                     Font::CormorantGaramondMedium,
                     #[cfg(feature = "static")]
-                    Font::CormorantGaramondMediumItalic,
-                    #[cfg(feature = "static")]
                     Font::CormorantGaramondSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::CormorantGaramondSemiBoldItalic,
                     #[cfg(feature = "static")]
                     Font::CormorantGaramondBold,
                     #[cfg(feature = "static")]
+                    Font::CormorantGaramondLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantGaramondItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantGaramondMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantGaramondSemiBoldItalic,
+                    #[cfg(feature = "static")]
                     Font::CormorantGaramondBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::CormorantGaramondVariable,
+                    #[cfg(feature = "variable")]
+                    Font::CormorantGaramondItalicVariable,
                     #[cfg(feature = "static")]
                     Font::CormorantInfantLight,
                     #[cfg(feature = "static")]
-                    Font::CormorantInfantLightItalic,
-                    #[cfg(feature = "static")]
                     Font::CormorantInfantRegular,
-                    #[cfg(feature = "static")]
-                    Font::CormorantInfantItalic,
                     #[cfg(feature = "static")]
                     Font::CormorantInfantMedium,
                     #[cfg(feature = "static")]
-                    Font::CormorantInfantMediumItalic,
-                    #[cfg(feature = "static")]
                     Font::CormorantInfantSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::CormorantInfantSemiBoldItalic,
                     #[cfg(feature = "static")]
                     Font::CormorantInfantBold,
                     #[cfg(feature = "static")]
+                    Font::CormorantInfantLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantInfantItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantInfantMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::CormorantInfantSemiBoldItalic,
+                    #[cfg(feature = "static")]
                     Font::CormorantInfantBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::CormorantInfantVariable,
+                    #[cfg(feature = "variable")]
+                    Font::CormorantInfantItalicVariable,
                     #[cfg(feature = "static")]
                     Font::CormorantSCLight,
                     #[cfg(feature = "static")]
@@ -20927,8 +24199,6 @@ impl Category {
                     Font::DaiBannaSILBold,
                     #[cfg(feature = "static")]
                     Font::DaiBannaSILBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::DanfoRegular,
                     #[cfg(feature = "variable")]
                     Font::DanfoRegularVariable,
                     #[cfg(feature = "static")]
@@ -20998,6 +24268,38 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::EnriquetaBold,
                     #[cfg(feature = "static")]
+                    Font::EpundaSlabLight,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabRegular,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabMedium,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabBlack,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::EpundaSlabBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::EpundaSlabVariable,
+                    #[cfg(feature = "variable")]
+                    Font::EpundaSlabItalicVariable,
+                    #[cfg(feature = "static")]
                     Font::EstebanRegular,
                     #[cfg(feature = "static")]
                     Font::FanwoodTextRegular,
@@ -21054,18 +24356,6 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::FrankRuhlLibreVariable,
                     #[cfg(feature = "static")]
-                    Font::Fraunces9ptThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptBlack,
-                    #[cfg(feature = "static")]
                     Font::Fraunces72ptThin,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptLight,
@@ -21077,30 +24367,6 @@ impl Category {
                     Font::Fraunces72ptBold,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftBlack,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSoftThin,
                     #[cfg(feature = "static")]
@@ -21114,30 +24380,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSoftBlack,
                     #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftBlack,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftBlack,
-                    #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftThin,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftLight,
@@ -21149,30 +24391,6 @@ impl Category {
                     Font::Fraunces72ptSuperSoftBold,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftBlack,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftThin,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftLight,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftRegular,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftBold,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftBlack,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptBlackItalic,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptThinItalic,
                     #[cfg(feature = "static")]
@@ -21186,30 +24404,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::Fraunces144ptThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSoftBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::Fraunces72ptSoftThinItalic,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSoftLightItalic,
@@ -21222,30 +24416,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSoftBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSoftBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces9ptSuperSoftBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftThinItalic,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftLightItalic,
@@ -21257,18 +24427,6 @@ impl Category {
                     Font::Fraunces72ptSuperSoftBoldItalic,
                     #[cfg(feature = "static")]
                     Font::Fraunces72ptSuperSoftBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::Fraunces144ptSuperSoftBlackItalic,
                     #[cfg(feature = "variable")]
                     Font::FrauncesVariable,
                     #[cfg(feature = "variable")]
@@ -21376,8 +24534,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::GupterBold,
                     #[cfg(feature = "static")]
-                    Font::GurajadaRegular,
-                    #[cfg(feature = "static")]
                     Font::HabibiRegular,
                     #[cfg(feature = "static")]
                     Font::HahmletThin,
@@ -21412,13 +24568,23 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::HanumanThin,
                     #[cfg(feature = "static")]
+                    Font::HanumanExtraLight,
+                    #[cfg(feature = "static")]
                     Font::HanumanLight,
                     #[cfg(feature = "static")]
                     Font::HanumanRegular,
                     #[cfg(feature = "static")]
+                    Font::HanumanMedium,
+                    #[cfg(feature = "static")]
+                    Font::HanumanSemiBold,
+                    #[cfg(feature = "static")]
                     Font::HanumanBold,
                     #[cfg(feature = "static")]
+                    Font::HanumanExtraBold,
+                    #[cfg(feature = "static")]
                     Font::HanumanBlack,
+                    #[cfg(feature = "variable")]
+                    Font::HanumanVariable,
                     #[cfg(feature = "static")]
                     Font::HeadlandOneRegular,
                     #[cfg(feature = "static")]
@@ -21656,8 +24822,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::InstrumentSerifItalic,
                     #[cfg(feature = "static")]
-                    Font::ItalianaRegular,
-                    #[cfg(feature = "static")]
                     Font::JacquesFrancoisRegular,
                     #[cfg(feature = "static")]
                     Font::JoanRegular,
@@ -21878,6 +25042,16 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::LabradaItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::LailaLight,
+                    #[cfg(feature = "static")]
+                    Font::LailaRegular,
+                    #[cfg(feature = "static")]
+                    Font::LailaMedium,
+                    #[cfg(feature = "static")]
+                    Font::LailaSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::LailaBold,
+                    #[cfg(feature = "static")]
                     Font::LateefExtraLight,
                     #[cfg(feature = "static")]
                     Font::LateefLight,
@@ -21894,11 +25068,37 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::LedgerRegular,
                     #[cfg(feature = "static")]
+                    Font::LibertinusSerifRegular,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifItalic,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifBold,
+                    #[cfg(feature = "static")]
+                    Font::LibertinusSerifBoldItalic,
+                    #[cfg(feature = "static")]
                     Font::LibreBaskervilleRegular,
+                    #[cfg(feature = "static")]
+                    Font::LibreBaskervilleMedium,
+                    #[cfg(feature = "static")]
+                    Font::LibreBaskervilleSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::LibreBaskervilleBold,
                     #[cfg(feature = "static")]
                     Font::LibreBaskervilleItalic,
                     #[cfg(feature = "static")]
-                    Font::LibreBaskervilleBold,
+                    Font::LibreBaskervilleMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::LibreBaskervilleSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::LibreBaskervilleBoldItalic,
+                    #[cfg(feature = "variable")]
+                    Font::LibreBaskervilleVariable,
+                    #[cfg(feature = "variable")]
+                    Font::LibreBaskervilleItalicVariable,
                     #[cfg(feature = "static")]
                     Font::LibreBodoniRegular,
                     #[cfg(feature = "static")]
@@ -22234,21 +25434,289 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::MateSCRegular,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherLight,
+                    Font::Merriweather24ptSemiCondensedLight,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherLightItalic,
+                    Font::Merriweather24ptSemiCondensedRegular,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherRegular,
+                    Font::Merriweather24ptSemiCondensedMedium,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherItalic,
+                    Font::Merriweather24ptSemiCondensedSemiBold,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherBold,
+                    Font::Merriweather24ptSemiCondensedBold,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherBoldItalic,
+                    Font::Merriweather24ptSemiCondensedExtraBold,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherBlack,
+                    Font::Merriweather24ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
-                    Font::MerriweatherBlackItalic,
+                    Font::Merriweather24ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptLight,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptRegular,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptMedium,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptBlack,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather24ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather36ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather48ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather96ptBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiCondensedBlackItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptLightItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptMediumItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptSemiBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptExtraBoldItalic,
+                    #[cfg(feature = "static")]
+                    Font::Merriweather120ptBlackItalic,
+                    #[cfg(feature = "variable")]
+                    Font::MerriweatherVariable,
+                    #[cfg(feature = "variable")]
+                    Font::MerriweatherItalicVariable,
                     #[cfg(feature = "static")]
                     Font::MirzaRegular,
                     #[cfg(feature = "static")]
@@ -22347,16 +25815,6 @@ impl Category {
                     Font::NanumMyeongjoBold,
                     #[cfg(feature = "static")]
                     Font::NanumMyeongjoExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::NarnoorRegular,
-                    #[cfg(feature = "static")]
-                    Font::NarnoorMedium,
-                    #[cfg(feature = "static")]
-                    Font::NarnoorSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::NarnoorBold,
-                    #[cfg(feature = "static")]
-                    Font::NarnoorExtraBold,
                     #[cfg(feature = "static")]
                     Font::NeutonExtraLight,
                     #[cfg(feature = "static")]
@@ -23086,6 +26544,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::NotoSerifDisplayItalicVariable,
                     #[cfg(feature = "static")]
+                    Font::NotoSerifDivesAkuruRegular,
+                    #[cfg(feature = "static")]
                     Font::NotoSerifDograRegular,
                     #[cfg(feature = "static")]
                     Font::NotoSerifEthiopicExtraCondensedThin,
@@ -23369,6 +26829,24 @@ impl Category {
                     Font::NotoSerifHebrewBlack,
                     #[cfg(feature = "variable")]
                     Font::NotoSerifHebrewVariable,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaExtraLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaLight,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaRegular,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaMedium,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaExtraBold,
+                    #[cfg(feature = "static")]
+                    Font::NotoSerifHentaiganaBlack,
+                    #[cfg(feature = "variable")]
+                    Font::NotoSerifHentaiganaVariable,
                     #[cfg(feature = "static")]
                     Font::NotoSerifJPExtraLight,
                     #[cfg(feature = "static")]
@@ -24024,6 +27502,8 @@ impl Category {
                     #[cfg(feature = "variable")]
                     Font::NotoSerifTibetanVariable,
                     #[cfg(feature = "static")]
+                    Font::NotoSerifTodhriRegular,
+                    #[cfg(feature = "static")]
                     Font::NotoSerifTotoRegular,
                     #[cfg(feature = "static")]
                     Font::NotoSerifTotoMedium,
@@ -24079,6 +27559,16 @@ impl Category {
                     Font::PTSerifCaptionItalic,
                     #[cfg(feature = "static")]
                     Font::PadyakkeExpandedOneRegular,
+                    #[cfg(feature = "static")]
+                    Font::ParastooRegular,
+                    #[cfg(feature = "static")]
+                    Font::ParastooMedium,
+                    #[cfg(feature = "static")]
+                    Font::ParastooSemiBold,
+                    #[cfg(feature = "static")]
+                    Font::ParastooBold,
+                    #[cfg(feature = "variable")]
+                    Font::ParastooVariable,
                     #[cfg(feature = "static")]
                     Font::PeddanaRegular,
                     #[cfg(feature = "static")]
@@ -24568,78 +28058,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RhodiumLibreRegular,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerifThin,
                     #[cfg(feature = "static")]
                     Font::RobotoSerifExtraLight,
@@ -24657,132 +28075,6 @@ impl Category {
                     Font::RobotoSerifExtraBold,
                     #[cfg(feature = "static")]
                     Font::RobotoSerifBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif28ptThin,
                     #[cfg(feature = "static")]
@@ -24802,132 +28094,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoSerif28ptBlack,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerif36ptThin,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif36ptExtraLight,
@@ -24945,132 +28111,6 @@ impl Category {
                     Font::RobotoSerif36ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif36ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedBlack,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif72ptThin,
                     #[cfg(feature = "static")]
@@ -25090,132 +28130,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoSerif72ptBlack,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedBlack,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerif120ptThin,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif120ptExtraLight,
@@ -25233,132 +28147,6 @@ impl Category {
                     Font::RobotoSerif120ptExtraBold,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif120ptBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedThin,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedExtraLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedLight,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedRegular,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedMedium,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedSemiBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedExtraBold,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedBlack,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifUltraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiCondensedBlackItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerifThinItalic,
                     #[cfg(feature = "static")]
@@ -25378,132 +28166,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoSerifBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerifExtraExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptUltraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerif28ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif28ptExtraLightItalic,
@@ -25521,132 +28183,6 @@ impl Category {
                     Font::RobotoSerif28ptExtraBoldItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif28ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif28ptExtraExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptUltraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiCondensedBlackItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif36ptThinItalic,
                     #[cfg(feature = "static")]
@@ -25666,132 +28202,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoSerif36ptBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif36ptExtraExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptUltraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerif72ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif72ptExtraLightItalic,
@@ -25810,132 +28220,6 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::RobotoSerif72ptBlackItalic,
                     #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif72ptExtraExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptUltraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptCondensedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiCondensedBlackItalic,
-                    #[cfg(feature = "static")]
                     Font::RobotoSerif120ptThinItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif120ptExtraLightItalic,
@@ -25953,60 +28237,6 @@ impl Category {
                     Font::RobotoSerif120ptExtraBoldItalic,
                     #[cfg(feature = "static")]
                     Font::RobotoSerif120ptBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptSemiExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExpandedBlackItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedThinItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedExtraLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedLightItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedMediumItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedSemiBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedExtraBoldItalic,
-                    #[cfg(feature = "static")]
-                    Font::RobotoSerif120ptExtraExpandedBlackItalic,
                     #[cfg(feature = "variable")]
                     Font::RobotoSerifVariable,
                     #[cfg(feature = "variable")]
@@ -26720,6 +28950,8 @@ impl Category {
                     #[cfg(feature = "static")]
                     Font::UnnaBoldItalic,
                     #[cfg(feature = "static")]
+                    Font::UoqMunThenKhungRegular,
+                    #[cfg(feature = "static")]
                     Font::VastShadowRegular,
                     #[cfg(feature = "static")]
                     Font::VesperLibreRegular,
@@ -26877,6 +29109,18 @@ impl Category {
                     Font::ZillaSlabHighlightBold,
                 ]
             }
+        }
+    }
+}
+
+impl std::fmt::Display for Category {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Category::Display => f.write_str("Display"),
+            Category::Handwriting => f.write_str("Handwriting"),
+            Category::Monospace => f.write_str("Monospace"),
+            Category::SansSerif => f.write_str("SansSerif"),
+            Category::Serif => f.write_str("Serif"),
         }
     }
 }
