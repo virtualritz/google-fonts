@@ -1,12 +1,13 @@
 # google-fonts
 
 Rust library for downloading and caching Google Fonts
-  - Provides access to `11,689` fonts and `1,708` font families
-  - Supports both variable and static font technologies
-  - Offers flexible API for font retrieval with caching options
-  - Includes configurable features for optimizing build time and crate size
-  - Similar functionality to [Android Studio's Downloadable Fonts](https://developer.android.com/develop/ui/views/text-and-emoji/downloadable-fonts) and [Google's Web Fonts API](https://developers.google.com/fonts/docs/developer_api)
-  - Published crate available on crates.io: https://crates.io/crates/google-fonts
+
+- Provides access to `11,689` fonts and `1,708` font families
+- Supports both variable and static font technologies
+- Offers flexible API for font retrieval with caching options
+- Includes configurable features for optimizing build time and crate size
+- Similar functionality to [Android Studio's Downloadable Fonts](https://developer.android.com/develop/ui/views/text-and-emoji/downloadable-fonts) and [Google's Web Fonts API](https://developers.google.com/fonts/docs/developer_api)
+- Published crate available on crates.io: https://crates.io/crates/google-fonts
 
 # Example
 
@@ -39,13 +40,14 @@ fn main() {
 # Crate features
 
 `full`, `variable`, and `static` crate features are available.
-* `variable` enables only fonts with [variable font technology](https://fonts.google.com/knowledge/using_variable_fonts_on_the_web).
-* `static` enables only fonts with _static font technology_.
-* `full` enables both `variable` and `static` features.
+
+- `variable` enables only fonts with [variable font technology](https://fonts.google.com/knowledge/using_variable_fonts_on_the_web).
+- `static` enables only fonts with _static font technology_.
+- `full` enables both `variable` and `static` features.
 
 `variable` is the default feature.
 
-Variable font technology is newer, more flexible, and provides style variations in one or two files. Static font technology uses more font files to accomplish the same thing. A majority of the fonts are in the `static` feature. 
+Variable font technology is newer, more flexible, and provides style variations in one or two files. Static font technology uses more font files to accomplish the same thing. A majority of the fonts are in the `static` feature.
 
 Prefer the `variable` feature when possible.
 
