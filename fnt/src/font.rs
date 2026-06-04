@@ -7,6 +7,25 @@ use reqwest::blocking::Client;
 use serde::{Deserialize, Serialize};
 use std::fs;
 
+/// Ensure a rustls [`CryptoProvider`] is installed before a reqwest client is
+/// built. With `reqwest/rustls-no-provider`, reqwest panics unless a process
+/// default provider exists, so install the `ring` provider once. Errors are
+/// ignored: a provider may already have been installed by the application or
+/// another dependency. No-op for the `native-tls` backend.
+///
+/// [`CryptoProvider`]: rustls::crypto::CryptoProvider
+#[cfg(feature = "rustls-tls")]
+fn ensure_crypto_provider() {
+    use std::sync::Once;
+    static INIT: Once = Once::new();
+    INIT.call_once(|| {
+        let _ = rustls::crypto::ring::default_provider().install_default();
+    });
+}
+
+#[cfg(not(feature = "rustls-tls"))]
+fn ensure_crypto_provider() {}
+
 /// An _enumeration_ of [Google fonts](https://fonts.google.com).
 #[derive(Debug, Clone, Copy, Hash, Eq, PartialEq, Ord, PartialOrd)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -88285,6 +88304,7 @@ impl Font {
 
     /// Get TTF font data from the network.
     pub fn get(&self) -> Result<Vec<u8>, FontError> {
+        ensure_crypto_provider();
         // Get file info from the network.
         let result = Client::new()
             .get("https://fonts.google.com/download/list")
